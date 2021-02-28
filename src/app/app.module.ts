@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { MenuModule } from './shared/menu/menu.module';
 import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './modules/home/home.module';
+import { CandidatesModule } from './modules/candidates/candidates.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HomeModule } from './modules/home/home.module';
     CoreModule,
     MenuModule,
     ErrorsModule,
-    HomeModule
+    HomeModule,
+    CandidatesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

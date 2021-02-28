@@ -9,4 +9,8 @@ export class MenuComponent {
 
   acoes: String[] = ['Entrevistas', 'Candidatos', 'Calendário']
 
+
+  goTo(acao: string) {
+      console.log(acao)
+  }
 }

@@ -2,3 +2,8 @@
     height: 1024px;
     background-color: rgb(227, 230, 230);
 }
+
+.mat-list-item:hover {
+    background-color: rgb(156, 160, 160);
+    cursor: pointer;
+}

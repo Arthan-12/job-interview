@@ -7,6 +7,7 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./pages/home.component";
 import { DateCardComponent } from './components/date-card/date-card.component';
 import { MatCardModule } from "@angular/material";
+import { CoreModule } from "src/app/core/core.module";
 
 @NgModule({
     declarations: [ 
@@ -21,7 +22,7 @@ import { MatCardModule } from "@angular/material";
 
         MatCardModule,
 
-        MenuModule
+        MenuModule,
     ],
 })
 export class HomeModule {}
