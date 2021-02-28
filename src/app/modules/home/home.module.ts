@@ -5,10 +5,12 @@ import { RouterModule } from "@angular/router";
 import { MenuModule } from "src/app/shared/menu/menu.module";
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./pages/home.component";
+import { DateCardComponent } from './components/date-card/date-card.component';
+import { MatCardModule } from "@angular/material";
 
 @NgModule({
     declarations: [ 
-        HomeComponent
+        HomeComponent, DateCardComponent
     ],
     imports: [
         CommonModule,
@@ -16,6 +18,8 @@ import { HomeComponent } from "./pages/home.component";
         FormsModule,
         RouterModule,
         HomeRoutingModule,
+
+        MatCardModule,
 
         MenuModule
     ],

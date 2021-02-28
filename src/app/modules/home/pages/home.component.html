@@ -1,2 +1,12 @@
-<app-menu></app-menu>
+<div class="container">
+    <div class="menu">
+        <app-menu></app-menu>
+    </div>
+    <div class="content">
+        <h1>Bem-vindo, {{user}}!</h1>
+        <div class="week-calendar">
+            <app-date-card></app-date-card>
+        </div>
+    </div>
+</div>
 <router-outlet></router-outlet>
