@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
+
+import { CoreModule } from './core/core.module';
+import { MenuModule } from './shared/menu/menu.module';
+import { ErrorsModule } from './errors/errors.module';
+import { HomeModule } from './modules/home/home.module';
 
 @NgModule({
   declarations: [
@@ -17,11 +20,12 @@ import { MatToolbarModule, MatInputModule, MatButtonModule, MatIconModule } from
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
 
-    MatToolbarModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
+    CoreModule,
+    MenuModule,
+    ErrorsModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

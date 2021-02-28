@@ -1,0 +1,15 @@
+.content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-info {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.title {
+    cursor: pointer;
+}
