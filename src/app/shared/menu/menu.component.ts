@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,10 +8,14 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
 
+  constructor(private router: Router) {}
+
   acoes: String[] = ['Entrevistas', 'Candidatos', 'Calendário']
 
 
   goTo(acao: string) {
-      console.log(acao)
+      if(acao == 'Candidatos') {
+        this.router.navigate(['candidatos'])
+      }
   }
 }
