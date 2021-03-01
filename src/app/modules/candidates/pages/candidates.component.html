@@ -9,37 +9,45 @@
         </div>
         <div class="candidates-table">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+                    <mat-cell *matCellDef="let candidate">
+                        {{candidate.id}}
+                    </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef>Nome</th>
-                    <td mat-cell *matCellDef="let candidate">
+                    <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+                    <mat-cell *matCellDef="let candidate">
                         {{candidate.name}}
-                    </td>
+                    </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="interview">
-                    <th mat-header-cell *matHeaderCellDef>Entrevista</th>
-                    <td mat-cell *matCellDef="let candidate">
+                    <mat-header-cell *matHeaderCellDef>Entrevista</mat-header-cell>
+                    <mat-cell *matCellDef="let candidate">
                         {{candidate.interview}}
-                    </td>
+                    </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="score">
-                    <th mat-header-cell *matHeaderCellDef>Pontuação</th>
-                    <td mat-cell *matCellDef="let candidate">
+                    <mat-header-cell *matHeaderCellDef>Pontuação</mat-header-cell>
+                    <mat-cell *matCellDef="let candidate">
                         {{candidate.score}}
-                    </td>
+                    </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef>Data</th>
-                    <td mat-cell *matCellDef="let candidate">
+                    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+                    <mat-cell *matCellDef="let candidate">
                         {{candidate.date}}
-                    </td>
+                    </mat-cell>
                 </ng-container>
 
                 <!--Table CRUD-->
 
-                <ng-container matColumnDef="actions">
+                <!-- <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef>
                         <button mat-icon-button collor="primary" (click)="createCandidate()">
                         <mat-icon>add</mat-icon>
@@ -55,20 +63,21 @@
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>
-                </ng-container>
-
+                </ng-container> -->
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
             </table>
         </div>
-        <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+        <!-- <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
             Não foram encontrados padawans
-          </div>
+          </div> -->
         
-          <mat-paginator #paginator
+          <!-- <mat-paginator #paginator
                          [length]="dataSource.filteredData.length"
                          [pageIndex]="0"
                          [pageSize]="10"
                          [pageSizeOptions]="[5, 10, 25, 100]">
-          </mat-paginator>
+          </mat-paginator> -->
     </div>
 </div>
