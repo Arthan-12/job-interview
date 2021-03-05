@@ -1,9 +1,18 @@
 {
-    "candidates": [{
-        "id": 1,
-        "name":"Victor Souza",
-        "interview": "Trainee Consultoria",
-        "score": 75,
-        "date": "28/02/2021"
-    }]
+  "candidates": [
+    {
+      "name": "Alexandre Souza",
+      "interview": "Scrum Master",
+      "score": "80",
+      "date": "05/03/2021",
+      "id": 3
+    },
+    {
+      "name": "Victor Souza",
+      "interview": "Trainee Consultoria",
+      "score": "75",
+      "date": "25/02/2021",
+      "id": 4
+    }
+  ]
 }

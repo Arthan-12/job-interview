@@ -14,10 +14,15 @@ import {DataSource} from '@angular/cdk/collections';
 export class CandidatesComponent implements OnInit {
 
   candidates: Candidate[] = [];
+  candidate: Candidate;
+  index: number
+  currentRow: number
+  
 
   constructor(
      public httpClient: HttpClient,
      private candidateService: CandidateService
+     
   ) {}
    
 
@@ -30,9 +35,29 @@ export class CandidatesComponent implements OnInit {
         n.interview,
         n.score,
         n.date
+        n.id
       })
     });
-    console.log()
+    //console.log()
+  }
+
+  deleteCandidate(id: number) {
+    this.candidateService.deleteCandidate(id).subscribe((res =>
+      this.candidate = res));
+  }
+
+  getCandidate(i: number) {
+      //this.index = i + 1;
+      this.candidateService.getCandidate().subscribe((res) => {
+      this.candidate = res
+      this.currentRow = i;
+      console.log(this.candidate[i], i);
+    })
+  }
+
+  getIndex(i) {
+    res => this.candidate = res;
+    console.log(i);
   }
 
   updateCandidate(data: Candidate) {

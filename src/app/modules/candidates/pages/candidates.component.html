@@ -17,16 +17,25 @@
                 </tr>
             </thead>
             <tbody class="tab-candidatos-content">
-                <tr *ngFor="let candidate of candidates">
+                <tr *ngFor="let candidate of candidates; let i = index"(click)="getCandidate(i)" [class.current-row]= "i == currentRow">
                     <td>{{candidate.name}}</td>
                     <td>{{candidate.interview}}</td>
                     <td>{{candidate.score}}</td>
                     <td>{{candidate.date}}</td>
+                    <td >
+                        <mat-icon>
+                            create
+                        </mat-icon>
+                    </td>
+                    <td (click)="deleteCandidate(i)">
+                        <mat-icon>
+                            delete
+                        </mat-icon>
+                    </td>
                 </tr>
             </tbody>
         </table>
-                
-
+        <app-form></app-form>
         
     </div>
 </div>

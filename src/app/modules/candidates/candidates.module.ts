@@ -6,11 +6,12 @@ import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPag
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { FormComponent } from './components/form/form.component';
 
 
 
 @NgModule({
-  declarations: [CandidatesComponent, AddDialogComponent],
+  declarations: [CandidatesComponent, AddDialogComponent, FormComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
