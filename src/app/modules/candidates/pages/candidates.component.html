@@ -7,77 +7,26 @@
         <div class="tools">
             <button id="btn-add" mat-fab color="primary" (click)="createCandidate()">+</button>
         </div>
-        <div class="candidates-table">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table class="mat-elevation-z8">
+            <thead>
+                <tr>
+                    <th>NOME</th>
+                    <th>ENTREVISTA</th>
+                    <th>SCORE</th>
+                    <th>DATA</th>
+                </tr>
+            </thead>
+            <tbody class="tab-candidatos-content">
+                <tr *ngFor="let candidate of candidates">
+                    <td>{{candidate.name}}</td>
+                    <td>{{candidate.interview}}</td>
+                    <td>{{candidate.score}}</td>
+                    <td>{{candidate.date}}</td>
+                </tr>
+            </tbody>
+        </table>
                 
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-                    <mat-cell *matCellDef="let candidate">
-                        {{candidate.id}}
-                    </mat-cell>
-                </ng-container>
 
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
-                    <mat-cell *matCellDef="let candidate">
-                        {{candidate.name}}
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="interview">
-                    <mat-header-cell *matHeaderCellDef>Entrevista</mat-header-cell>
-                    <mat-cell *matCellDef="let candidate">
-                        {{candidate.interview}}
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="score">
-                    <mat-header-cell *matHeaderCellDef>Pontuação</mat-header-cell>
-                    <mat-cell *matCellDef="let candidate">
-                        {{candidate.score}}
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="date">
-                    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
-                    <mat-cell *matCellDef="let candidate">
-                        {{candidate.date}}
-                    </mat-cell>
-                </ng-container>
-
-                <!--Table CRUD-->
-
-                <!-- <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>
-                        <button mat-icon-button collor="primary" (click)="createCandidate()">
-                        <mat-icon>add</mat-icon>
-                        </button>
-                    </th>
-
-                    <td mat-cell *matCellDef="let candidate; let i=index;">
-                        <button mat-icon-button color="accent" (click)="editCandidate(i, candidate.name, candidate.interview, candidate.score, candidate.date)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-
-                        <button mat-icon-button color="accent" (click)="deleteCandidate(i,candidate.name, candidate.interview, candidate.score, candidate.date)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </td>
-                </ng-container> -->
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-            </table>
-        </div>
-        <!-- <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-            Não foram encontrados padawans
-          </div> -->
         
-          <!-- <mat-paginator #paginator
-                         [length]="dataSource.filteredData.length"
-                         [pageIndex]="0"
-                         [pageSize]="10"
-                         [pageSizeOptions]="[5, 10, 25, 100]">
-          </mat-paginator> -->
     </div>
 </div>

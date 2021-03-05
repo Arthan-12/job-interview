@@ -5,4 +5,3 @@ export interface Candidate {
     score: number;
     date: string;
   }
-  
