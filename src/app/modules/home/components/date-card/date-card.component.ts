@@ -8,17 +8,22 @@ import * as moment from 'moment';
 })
 export class DateCardComponent implements OnInit {
 
-  today = moment();
+  todayDay = moment().format('ddd');
+  todayNum = moment().format('DD/MM');
+  cards: number[] = []
 
   constructor(
   ) { }
 
   ngOnInit() {
+    this.weekCalculator()
   }
 
-  cards: number[] = [
-    //this.today, moment().add(1,'d'), moment().add(2,'d'), moment().add(3,'d'), moment().add(4,'d'), moment().add(5,'d'), moment().add(6,'d')
-    1, 2, 3, 4, 5, 6, 7
-  ];
+  weekCalculator() {
+    for(let i = 0; i < 8; i++) {
+      let numero = 1
+      this.cards = [numero++];
+    }
+  }
   
 }

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
-import {DataSource} from '@angular/cdk/collections';
+import { AddDialogComponent } from '../components/add-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-candidates',
@@ -13,14 +14,22 @@ import {DataSource} from '@angular/cdk/collections';
 })
 export class CandidatesComponent implements OnInit {
 
+  candidateUpdateForm: FormGroup;
   candidates: Candidate[] = [];
   candidate: Candidate;
-  index: number
-  currentRow: number
-  
+  index: number;
+  currentRow: number;
+  candidate$: Observable<Candidate>;
+  candidateId: number;
+  candidateName: string;
+  candidateInterview: string;
+  candidateScore: number;
+  candidateDate: string;
 
   constructor(
+    public fb: FormBuilder,
      public httpClient: HttpClient,
+     public dialog: MatDialog,
      private candidateService: CandidateService
      
   ) {}
@@ -38,29 +47,48 @@ export class CandidatesComponent implements OnInit {
         n.id
       })
     });
-    //console.log()
-  }
-
-  deleteCandidate(id: number) {
-    this.candidateService.deleteCandidate(id).subscribe((res =>
-      this.candidate = res));
-  }
-
-  getCandidate(i: number) {
-      //this.index = i + 1;
-      this.candidateService.getCandidate().subscribe((res) => {
-      this.candidate = res
-      this.currentRow = i;
-      console.log(this.candidate[i], i);
+    this.candidateUpdateForm = this.fb.group({
+      name: [''],
+      interview: [''],
+      score: [''],
+      date: [''],    
     })
   }
 
-  getIndex(i) {
-    res => this.candidate = res;
-    console.log(i);
+  deleteCandidate() {
+    this.candidateService.deleteCandidate(this.candidateId).subscribe();
+    // this.candidateService.deleteCandidate(id).subscribe((res =>
+    //   this.candidate = res));
+    console.log(this.candidateId)
+    
   }
 
-  updateCandidate(data: Candidate) {
- }
+  getCandidate(i: number) {
+      this.candidateService.getCandidate().subscribe((res) => {
+      this.candidate = res;
+      this.currentRow = i;
+      this.candidate$ = this.candidateService.findById(this.candidate[i].id);
+      this.candidateId = this.candidate[i].id;
+      this.candidateName = this.candidate[i].name;
+      this.candidateInterview = this.candidate[i].interview;
+      this.candidateScore = this.candidate[i].score;
+      this.candidateDate = this.candidate[i].date;
+      console.log(this.candidate[i], this.candidateId);
+    })
+  }
+
+  updateCandidate(): void {
+    console.log(this.candidateId)
+    this.candidateUpdateForm = this.fb.group({
+     name: [this.candidateName],
+     interview: [this.candidateInterview],
+     score: [this.candidateScore],
+     date: [this.candidateDate],    
+      })
+    }
+
+    submitForm() {
+      this.candidateService.editCandidate(this.candidateId, this.candidateUpdateForm.value).subscribe()
+    }
   
 }

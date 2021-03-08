@@ -21,6 +21,10 @@ export class CandidateService {
     constructor(private http: HttpClient) {
     }
 
+    findById(candidateId: number) {
+        return this.http.get<Candidate>(this.API_URL + '/' + candidateId)
+    }
+
     getAllCandidates(): Observable<Candidate[]> {
         return this.http.get<Candidate[]>(this.API_URL);
     }
@@ -33,7 +37,8 @@ export class CandidateService {
         return this.http.post<Candidate>(this.API_URL, JSON.stringify(candidate), this.httpOptions);
     }
 
-    editCandidate(candidate: Candidate) {
+    editCandidate(id, candidate): Observable<Candidate> {
+        return this.http.put<Candidate>(this.API_URL + '/' + id, JSON.stringify(candidate), this.httpOptions);
     }
 
     deleteCandidate(id: number) {

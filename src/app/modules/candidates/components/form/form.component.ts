@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidateService } from 'src/app/core/services/candidates.service';
 
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -10,6 +11,7 @@ import { CandidateService } from 'src/app/core/services/candidates.service';
 export class FormComponent {
 
   candidateForm: FormGroup;
+  candidateUpdateForm: FormGroup
 
   ngOnInit() {
       this.candidateForm = this.fb.group({
@@ -29,5 +31,6 @@ export class FormComponent {
     this.candidateService.createCandidate(this.candidateForm.value).subscribe(res =>
       console.log('Candidate created!'))
   }
+  
 
 }

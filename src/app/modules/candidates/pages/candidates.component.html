@@ -6,6 +6,8 @@
         <h1>Candidatos</h1>
         <div class="tools">
             <button id="btn-add" mat-fab color="primary" (click)="createCandidate()">+</button>
+            <button id="btn-add" mat-fab color="primary" (click)="deleteCandidate()">X</button>
+            <button id="btn-add" mat-fab color="primary" (click)="updateCandidate()">Up</button>
         </div>
         <table class="mat-elevation-z8">
             <thead>
@@ -27,15 +29,33 @@
                             create
                         </mat-icon>
                     </td>
-                    <td (click)="deleteCandidate(i)">
-                        <mat-icon>
-                            delete
-                        </mat-icon>
-                    </td>
+                    
                 </tr>
             </tbody>
         </table>
         <app-form></app-form>
+        <div>
+            <h1>Atualiza candidato</h1>
+            <form [formGroup]=" candidateUpdateForm" (ngSubmit)="submitForm()" novalidate>
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" formControlName="name" class="form-control" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label>Entrevista</label>
+                    <textarea class="form-control" formControlName="interview" rows="3" maxlength="50"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Score</label>
+                    <input type="text" formControlName="score" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Data</label>
+                    <input type="text" formControlName="date" class="form-control">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
         
     </div>
 </div>
