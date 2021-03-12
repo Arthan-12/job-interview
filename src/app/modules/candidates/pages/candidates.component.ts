@@ -29,7 +29,7 @@ export class CandidatesComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
      public httpClient: HttpClient,
-     public dialog: MatDialog,
+     private dialog: MatDialog,
      private candidateService: CandidateService
      
   ) {}
@@ -89,6 +89,12 @@ export class CandidatesComponent implements OnInit {
 
     submitForm() {
       this.candidateService.editCandidate(this.candidateId, this.candidateUpdateForm.value).subscribe()
+    }
+
+    openDialog() {
+      this.dialog.open(AddDialogComponent, { data: { modalMessage: 'teste'},
+      })
+      .afterClosed().subscribe()
     }
   
 }

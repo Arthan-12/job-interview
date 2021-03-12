@@ -9,12 +9,6 @@ import { Candidate } from 'src/app/core/models/candidate.model';
 })
 export class AddDialogComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<AddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Candidate) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 
 }

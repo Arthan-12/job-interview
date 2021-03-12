@@ -28,7 +28,7 @@ import { FormComponent } from './components/form/form.component';
     MatInputModule,
     MatDialogModule
   ],
-  entryComponents: [],
+  entryComponents: [AddDialogComponent],
   providers: [],
 })
 export class CandidatesModule { }
