@@ -1,0 +1,36 @@
+<div class="container">
+  <div mat-dialog-content class="content">
+    <div>
+      <h1>{{data.formTitle}}</h1>
+      <form [formGroup]=" candidateForm" (ngSubmit)="submitForm()" novalidate>
+          <div class="form-group">
+              <label>Nome</label>
+              <input type="text" formControlName="name" class="form-control" maxlength="20" value="{{data.name}}">
+          </div>
+          <div class="form-group">
+              <label>Entrevista</label>
+              <textarea class="form-control" formControlName="interview" rows="3" maxlength="50" value="{{data.interview}}"></textarea>
+          </div>
+          <div class="form-group">
+              <label>Score</label>
+              <input type="text" formControlName="score" class="form-control" value="{{data.score}}">
+          </div>
+          <div class="form-group">
+              <label>Data</label>
+              <input type="text" formControlName="date" class="form-control" value="{{data.date}}">
+          </div>
+          <button type="submit">Submit</button>
+      </form>
+  </div>
+  
+
+  </div>
+  <div mat-dialog-actions>
+    <a [mat-dialog-close]="false">
+      <span class="material-icons">close</span>
+    </a>
+    <a [mat-dialog-close]="true">
+      <span class="material-icons">check</span>
+    </a>
+  </div>
+</div>

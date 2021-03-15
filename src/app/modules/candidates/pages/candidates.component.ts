@@ -5,7 +5,7 @@ import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/m
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
-import { AddDialogComponent } from '../components/add-dialog/add-dialog.component';
+import { EditCandidateDialogComponent } from '../components/edit-candidate-dialog/edit-candidate-dialog.component';
 
 @Component({
   selector: 'app-candidates',
@@ -79,6 +79,14 @@ export class CandidatesComponent implements OnInit {
 
   updateCandidate(): void {
     console.log(this.candidateId)
+    this.dialog.open(EditCandidateDialogComponent, {data: {
+      formTitle: ['Editar dados do candidato'], 
+      name: [this.candidateName],
+      interview: [this.candidateInterview],
+      score: [this.candidateScore],
+      date: [this.candidateScore]
+    }
+  })
     this.candidateUpdateForm = this.fb.group({
      name: [this.candidateName],
      interview: [this.candidateInterview],
@@ -87,14 +95,17 @@ export class CandidatesComponent implements OnInit {
       })
     }
 
-    submitForm() {
-      this.candidateService.editCandidate(this.candidateId, this.candidateUpdateForm.value).subscribe()
-    }
-
-    openDialog() {
-      this.dialog.open(AddDialogComponent, { data: { modalMessage: 'teste'},
-      })
-      .afterClosed().subscribe()
-    }
+  openDialog() {
+    this.dialog.open(EditCandidateDialogComponent, { data: {
+      formTitle: ['Inscreva um candidato'],
+      name: [''],
+      interview: [''],
+      score: [''],
+      date: ['']
+      },
+    })
+    .afterClosed()
+      //.subscribe(this.candidateService.createCandidate(this.candidateForm.value))
+  }
   
 }

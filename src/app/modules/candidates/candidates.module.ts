@@ -5,13 +5,13 @@ import { MenuModule } from 'src/app/shared/menu/menu.module';
 import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { EditCandidateDialogComponent } from './components/edit-candidate-dialog/edit-candidate-dialog.component';
 import { FormComponent } from './components/form/form.component';
 
 
 
 @NgModule({
-  declarations: [CandidatesComponent, AddDialogComponent, FormComponent],
+  declarations: [CandidatesComponent, EditCandidateDialogComponent, FormComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -28,7 +28,7 @@ import { FormComponent } from './components/form/form.component';
     MatInputModule,
     MatDialogModule
   ],
-  entryComponents: [AddDialogComponent],
+  entryComponents: [EditCandidateDialogComponent],
   providers: [],
 })
 export class CandidatesModule { }
