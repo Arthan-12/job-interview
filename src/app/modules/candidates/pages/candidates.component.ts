@@ -27,10 +27,10 @@ export class CandidatesComponent implements OnInit {
   candidateDate: string;
 
   constructor(
-    public fb: FormBuilder,
-     public httpClient: HttpClient,
-     private dialog: MatDialog,
-     private candidateService: CandidateService
+      public fb: FormBuilder,
+      public httpClient: HttpClient,
+      private dialog: MatDialog,
+      private candidateService: CandidateService
      
   ) {}
    
@@ -80,20 +80,15 @@ export class CandidatesComponent implements OnInit {
   updateCandidate(): void {
     console.log(this.candidateId)
     this.dialog.open(EditCandidateDialogComponent, {data: {
-      formTitle: ['Editar dados do candidato'], 
+      formTitle: ['Editar dados do candidato'],
+      id: [this.candidateId], 
       name: [this.candidateName],
       interview: [this.candidateInterview],
       score: [this.candidateScore],
-      date: [this.candidateScore]
-    }
-  })
-    this.candidateUpdateForm = this.fb.group({
-     name: [this.candidateName],
-     interview: [this.candidateInterview],
-     score: [this.candidateScore],
-     date: [this.candidateDate],    
-      })
-    }
+      date: [this.candidateDate]
+      }
+    })
+  }
 
   openDialog() {
     this.dialog.open(EditCandidateDialogComponent, { data: {
