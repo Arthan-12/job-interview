@@ -39,13 +39,6 @@ export class CandidatesComponent implements OnInit {
     this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
       console.log(data);
       this.candidates = data
-      this.candidates.map((n) => {
-        n.name,
-        n.interview,
-        n.score,
-        n.date
-        n.id
-      })
     });
     this.candidateUpdateForm = this.fb.group({
       name: [''],
@@ -56,9 +49,11 @@ export class CandidatesComponent implements OnInit {
   }
 
   deleteCandidate() {
-    this.candidateService.deleteCandidate(this.candidateId).subscribe();
-    // this.candidateService.deleteCandidate(id).subscribe((res =>
-    //   this.candidate = res));
+    this.candidateService.deleteCandidate(this.candidateId).subscribe(() =>
+      this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
+      this.candidates = data
+    })
+  )
     console.log(this.candidateId)
     
   }
@@ -88,6 +83,11 @@ export class CandidatesComponent implements OnInit {
       date: [this.candidateDate]
       }
     })
+    .afterClosed().subscribe(() =>
+      this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
+      this.candidates = data
+    })
+  )
   }
 
   openDialog() {
@@ -99,8 +99,11 @@ export class CandidatesComponent implements OnInit {
       date: ['']
       },
     })
-    .afterClosed()
-      //.subscribe(this.candidateService.createCandidate(this.candidateForm.value))
+    .afterClosed().subscribe(() =>
+    this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
+    this.candidates = data
+  })
+)
   }
   
 }
