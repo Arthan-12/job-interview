@@ -8,18 +8,44 @@
       "id": 1
     },
     {
-      "name": "teste2",
-      "interview": "teste2",
-      "score": "teste2",
-      "date": "teste2",
-      "id": 2
-    },
-    {
-      "name": "teste",
-      "interview": "teste33",
-      "score": "55",
+      "name": "Victor Souza",
+      "interview": "Trainee Consultoria",
+      "score": "80",
       "date": "2021-03-17",
       "id": 3
+    },
+    {
+      "name": "janderson",
+      "interview": "brilhamucho",
+      "score": "1111",
+      "date": "2021-03-18",
+      "id": 4
+    }
+  ],
+  "interviews": [
+    {
+      "id": 1,
+      "category": "Front End",
+      "vacancy": "Desenvolvedor Angular Pl",
+      "questions": "teste"
+    },
+    {
+      "id": 2,
+      "category": "Front End",
+      "vacancy": "Desenvolvedor React Pl",
+      "questions": "teste"
+    },
+    {
+      "id": 3,
+      "category": "Back End",
+      "vacancy": "Desenvolvedor Java Jr",
+      "questions": "teste"
+    },
+    {
+      "id": 4,
+      "category": "Agile",
+      "vacancy": "Scrum Master",
+      "questions": "teste"
     }
   ]
 }

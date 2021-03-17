@@ -5,9 +5,15 @@
     <div class="content">
         <h1>Candidatos</h1>
         <div class="tools">
-            <button id="btn-add" mat-fab color="primary" (click)="openDialog()">+</button>
-            <button id="btn-add" mat-fab color="primary" (click)="deleteCandidate()">X</button>
-            <button id="btn-add" mat-fab color="primary" (click)="updateCandidate()">Up</button>
+            <button id="btn-add" class="crud-action-btn" mat-fab color="primary" (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button id="btn-delete" class="crud-action-btn" mat-fab color="warn" (click)="deleteCandidate()" [disabled]= "i== currentRow ? true: false">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button id="btn-update"class="crud-action-btn" mat-fab color="accent" (click)="updateCandidate()" [disabled]= "i== currentRow ? true: false">
+                <mat-icon>update</mat-icon>
+            </button>
         </div>
         <table class="mat-elevation-z8">
             <thead>
@@ -24,12 +30,6 @@
                     <td>{{candidate.interview}}</td>
                     <td>{{candidate.score}}</td>
                     <td>{{candidate.date}}</td>
-                    <td >
-                        <mat-icon>
-                            create
-                        </mat-icon>
-                    </td>
-                    
                 </tr>
             </tbody>
         </table>

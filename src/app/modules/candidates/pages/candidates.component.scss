@@ -12,7 +12,8 @@
 }
 
 .current-row {
-    background-color: aliceblue;
+    background-color: rgb(176, 200, 221);
+    cursor: pointer;
 }
 
 .mat-elevation-z8 {
@@ -25,7 +26,9 @@
 
 .tools {
     margin: 1%;
+    
 }
+
 
 #btn-add {
     font-size: 24px;

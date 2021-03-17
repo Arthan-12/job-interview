@@ -1,0 +1,16 @@
+.title {
+    font-size: 12pt;
+}
+
+.dialog-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+#close-dialog {
+    color: red;
+}
+
+#confirm-dialog{
+    color: green;
+}

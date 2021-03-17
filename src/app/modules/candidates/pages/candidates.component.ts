@@ -5,6 +5,7 @@ import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/m
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
+import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { EditCandidateDialogComponent } from '../components/edit-candidate-dialog/edit-candidate-dialog.component';
 
 @Component({
@@ -32,7 +33,7 @@ export class CandidatesComponent implements OnInit {
       private dialog: MatDialog,
       private candidateService: CandidateService
      
-  ) {}
+  ) { }
    
 
   ngOnInit(): void {
@@ -48,28 +49,33 @@ export class CandidatesComponent implements OnInit {
     })
   }
 
-  deleteCandidate() {
-    this.candidateService.deleteCandidate(this.candidateId).subscribe(() =>
-      this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
-      this.candidates = data
+  getCandidate(i: number) {
+    this.candidateService.getCandidate().subscribe((res) => {
+    this.candidate = res;
+    this.currentRow = i;
+    this.candidate$ = this.candidateService.findById(this.candidate[i].id);
+    this.candidateId = this.candidate[i].id;
+    this.candidateName = this.candidate[i].name;
+    this.candidateInterview = this.candidate[i].interview;
+    this.candidateScore = this.candidate[i].score;
+    this.candidateDate = this.candidate[i].date;
+    console.log(this.candidate[i], this.candidateId);
     })
-  )
-    console.log(this.candidateId)
-    
   }
 
-  getCandidate(i: number) {
-      this.candidateService.getCandidate().subscribe((res) => {
-      this.candidate = res;
-      this.currentRow = i;
-      this.candidate$ = this.candidateService.findById(this.candidate[i].id);
-      this.candidateId = this.candidate[i].id;
-      this.candidateName = this.candidate[i].name;
-      this.candidateInterview = this.candidate[i].interview;
-      this.candidateScore = this.candidate[i].score;
-      this.candidateDate = this.candidate[i].date;
-      console.log(this.candidate[i], this.candidateId);
-    })
+  deleteCandidate() {
+      this.dialog.open(ConfirmDialogComponent, {data: {
+        actionTitle: 'Confirma exclusão de candidato?'
+        }
+      })
+      .afterClosed().subscribe((result) => {
+        if(result == true) {
+        this.candidateService.deleteCandidate(this.candidateId).subscribe()
+        this.refreshCandidateTable()
+        }
+        
+      }
+    )  
   }
 
   updateCandidate(): void {
@@ -83,12 +89,12 @@ export class CandidatesComponent implements OnInit {
       date: [this.candidateDate]
       }
     })
-    .afterClosed().subscribe(() =>
-      this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
-      this.candidates = data
+    .afterClosed().subscribe(() => {
+      this.refreshCandidateTable()
     })
-  )
   }
+
+  
 
   openDialog() {
     this.dialog.open(EditCandidateDialogComponent, { data: {
@@ -99,11 +105,15 @@ export class CandidatesComponent implements OnInit {
       date: ['']
       },
     })
-    .afterClosed().subscribe(() =>
-    this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
-    this.candidates = data
-  })
-)
+    .afterClosed().subscribe(() => {
+      this.refreshCandidateTable()
+      }  
+    );
+  }
+
+  refreshCandidateTable() {
+      this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
+      this.candidates = data)
   }
   
 }
