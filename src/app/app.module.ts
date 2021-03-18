@@ -10,6 +10,7 @@ import { MenuModule } from './shared/menu/menu.module';
 import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './modules/home/home.module';
 import { CandidatesModule } from './modules/candidates/candidates.module';
+import { InterviewsModule } from './modules/interviews/interviews.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CandidatesModule } from './modules/candidates/candidates.module';
     MenuModule,
     ErrorsModule,
     HomeModule,
-    CandidatesModule
+    CandidatesModule,
+    InterviewsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
+import { InterviewComponent } from './modules/interviews/pages/interview/interview.component';
 
 
 const routes: Routes = [
@@ -17,18 +18,22 @@ const routes: Routes = [
   { 
     path: 'candidatos', 
     component: CandidatesComponent,
-},  
+  },
+  {
+    path: 'entrevistas',
+    component: InterviewComponent
+  },
   { 
     path: 'not-found', 
     component: NotFoundComponent,
     data: {
         title: 'Not found'
     } 
-},  
-{ 
+  },  
+  { 
     path: '**', 
     redirectTo: 'not-found' 
-},
+  },
 ];
 
 @NgModule({

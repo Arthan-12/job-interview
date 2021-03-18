@@ -16,6 +16,8 @@ export class MenuComponent {
   goTo(acao: string) {
       if(acao == 'Candidatos') {
         this.router.navigate(['candidatos'])
+      } else if (acao == 'Entrevistas') {
+        this.router.navigate(['entrevistas'])
       }
   }
 }
