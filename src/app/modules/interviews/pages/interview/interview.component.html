@@ -6,13 +6,13 @@
             <h1>Entrevistas</h1>
             <mat-form-field>
                 <mat-label>Selecione uma entrevista</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="selectedOption">
                   <mat-option *ngFor="let interview of interviews$ | async as interviews"
                   [value]="interview.vacancy">
                     {{interview.vacancy}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-        <app-drag-and-drop></app-drag-and-drop>
+        <app-drag-and-drop [selectedOption]="selectedOption" ></app-drag-and-drop>
     </div>
 </div>

@@ -30,4 +30,12 @@ export class InterviewService {
     getInterview(): Observable<Interview> {
         return this.http.get<Interview>(this.API_URL);
     }
+
+    addInterview(interview: Interview): Observable<Interview> {
+        return this.http.post<Interview>(this.API_URL, JSON.stringify(interview), this.httpOptions)
+    }
+
+    editInterview(id: number, interview: Interview): Observable<Interview> {
+        return this.http.put<Interview>(this.API_URL + '/' + id, JSON.stringify(interview), this.httpOptions)
+    }
 }

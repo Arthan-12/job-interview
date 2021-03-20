@@ -1,7 +1,6 @@
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of interviews" cdkDrag>
-        <div>{{movie.name}}</div>
-        <div>{{movie.interview}}</div>
-        <div>{{movie.difficulty}}</div>
+    <div class="example-box" *ngFor="let question of questions" cdkDrag>
+        <div>{{question}}</div>
     </div>
   </div>
+  <button (click)="getQuestionnaire()">click</button>

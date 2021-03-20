@@ -5,21 +5,27 @@
       "interview": "Scrum Master",
       "score": "75",
       "date": "05/03/2021",
-      "id": 1
+      "id": 1,
+      "observations": "",
+      "status": "Entrevista agendada"
     },
     {
       "name": "Victor Souza",
       "interview": "Trainee Consultoria",
       "score": "80",
       "date": "2021-03-17",
-      "id": 3
+      "id": 3,
+      "observations": "",
+      "status": "Contratado"
     },
     {
       "name": "tirulipa",
       "interview": "brilhamucho",
       "score": "1111",
       "date": "2021-03-18",
-      "id": 4
+      "id": 4,
+      "observations": "",
+      "status": "Não compareceu"
     }
   ],
   "interviews": [
@@ -27,25 +33,99 @@
       "id": 1,
       "category": "Front End",
       "vacancy": "Desenvolvedor Angular Pl",
-      "questions": "teste"
+      "questionnaire": "Questionário Front End 3"
     },
     {
       "id": 2,
       "category": "Front End",
       "vacancy": "Desenvolvedor React Pl",
-      "questions": "teste"
+      "questionnaire": "Questionário Front End 3"
     },
     {
       "id": 3,
       "category": "Back End",
       "vacancy": "Desenvolvedor Java Jr",
-      "questions": "teste"
+      "questionnaire": "Questionário Back End 2"
     },
     {
       "id": 4,
       "category": "Agile",
       "vacancy": "Scrum Master",
-      "questions": "teste"
+      "questionnaire": "Questionário Agile 3"
+    }
+  ],
+  "questionnaires": [
+    {
+      "id": 1,
+      "title": "Questionário Front End 3",
+      "difficulty": 3,
+      "category": "Front End",
+      "questions": [
+        "pergunta FE 1",
+        "pergunta FE 2",
+        "pergunta FE 3",
+        "pergunta FE 4",
+        "pergunta FE 5",
+        "pergunta FE 6",
+        "pergunta FE 7",
+        "pergunta FE 8",
+        "pergunta FE 9",
+        "pergunta FE 10"
+      ],
+      "answers": [
+        "bad",
+        "regular",
+        "good",
+        "excellent"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Questionário Back End 2",
+      "difficulty": 3,
+      "category": "Back End",
+      "questions": [
+        "pergunta BE 1",
+        "pergunta BE 2",
+        "pergunta BE 3",
+        "pergunta BE 4",
+        "pergunta BE 5",
+        "pergunta BE 6",
+        "pergunta BE 7",
+        "pergunta BE 8",
+        "pergunta BE 9",
+        "pergunta BE 10"
+      ],
+      "answers": [
+        "bad",
+        "regular",
+        "good",
+        "excellent"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Questionário Agile 3",
+      "difficulty": 3,
+      "category": "Agile",
+      "questions": [
+        "pergunta AM 1",
+        "pergunta AM 2",
+        "pergunta AM 3",
+        "pergunta AM 4",
+        "pergunta AM 5",
+        "pergunta AM 6",
+        "pergunta AM 7",
+        "pergunta AM 8",
+        "pergunta AM 9",
+        "pergunta AM 10"
+      ],
+      "answers": [
+        "bad",
+        "regular",
+        "good",
+        "excellent"
+      ]
     }
   ]
 }

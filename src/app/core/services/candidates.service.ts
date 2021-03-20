@@ -37,7 +37,7 @@ export class CandidateService {
         return this.http.post<Candidate>(this.API_URL, JSON.stringify(candidate), this.httpOptions);
     }
 
-    editCandidate(id, candidate): Observable<Candidate> {
+    editCandidate(id: number, candidate: Candidate): Observable<Candidate> {
         return this.http.put<Candidate>(this.API_URL + '/' + id, JSON.stringify(candidate), this.httpOptions);
     }
 

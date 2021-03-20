@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Interview } from 'src/app/core/models/interview.model';
+import { Questionnaire } from 'src/app/core/models/questionnaire.model';
 import { InterviewService } from 'src/app/core/services/interview.service';
+import { QuestionnaireService } from 'src/app/core/services/questionnaire.service';
 
-
-export interface mockInterview {
-  value: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-interview',
@@ -16,21 +13,29 @@ export interface mockInterview {
 })
 export class InterviewComponent implements OnInit {
 
-  selectedValue: string;
+  @Input() selectedOption: string;
   interviewOptions: Interview[];
   interviewName: string[]
   interviews$: Observable<Interview[]>;
+  questionaires$: Observable<Questionnaire[]>
 
   constructor(
-    private interviewsService: InterviewService
+    private interviewsService: InterviewService,
+    private questionnaireService: QuestionnaireService
   ) { }
 
   ngOnInit() {
-    this.interviews$ = this.interviewsService.getAllInterviews()
+    this.interviews$ = this.interviewsService.getAllInterviews();
+    this.questionaires$ = this.questionnaireService.getAllQuestionnaires();
+    this.interviewsService.getInterview();
   }
 
   getInterview() {
     this.interviewsService.getInterview().subscribe()
+  }
+
+  getSelectedValue() {
+    console.log(this.selectedOption)
   }
 
 }
