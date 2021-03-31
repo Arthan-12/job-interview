@@ -47,3 +47,26 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
   
+  .tools {
+    margin: 1%;
+    width: 15%;
+    display: flex;
+    justify-content: space-between;   
+}
+
+.current-row {
+  background-color: rgb(176, 200, 221);
+  cursor: pointer;
+}
+
+#btn-add {
+    font-size: 24px;
+}
+
+#btn-get {
+  background-color: green;
+}
+
+#btn-get:disabled, #btn-get[disabled] {
+  background-color: #0000001f
+}

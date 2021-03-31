@@ -1,6 +1,24 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let question of questions" cdkDrag>
-        <div>{{question}}</div>
+<div class="tools">
+    <button id="btn-get" class="crud-action-btn" mat-fab color="primary" (click)="getQuestions()" [disabled]= "selectedOption == undefined ? true: false">
+        <mat-icon>description</mat-icon>
+    </button>
+    <button id="btn-add" class="crud-action-btn" mat-fab color="primary" (click)="addQuestion()" [disabled]= "selectedOption == undefined ? true: false">
+        <mat-icon>add</mat-icon>
+    </button>
+    <button id="btn-delete" class="crud-action-btn" mat-fab color="warn" (click)="deleteQuestion()" [disabled]= "i== currentRow ? true: false">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <button id="btn-update"class="crud-action-btn" mat-fab color="accent" type="submit" (click)="saveQuestionnaire()" [disabled]= "i== currentRow ? true: false">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+<div cdkDropList class="question-list" (cdkDropListDropped)="drop($event)" [cdkDropListData]="questions">
+    <div class="example-box"   *ngFor="let question of questions$ | async as questions; let i = index"
+        (click)="getQuestion(i)"
+        [class.current-row]= "i == currentRow"
+        cdkDrag>
+        <input matInput value= {{question?.question}}>
     </div>
-  </div>
-  <button (click)="getQuestionnaire()">click</button>
+</div>
+
+ 

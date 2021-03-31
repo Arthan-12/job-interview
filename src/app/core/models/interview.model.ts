@@ -1,7 +1,7 @@
 
 export interface Interview {
-    id: number;
-    category: string;
-    vacancy: string;
-    questions: string;
+    id?: number;
+    category?: string;
+    vacancy?: string;
+    questions?: string;
 }

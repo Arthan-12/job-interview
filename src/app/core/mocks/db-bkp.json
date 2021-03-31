@@ -1,0 +1,129 @@
+{
+    "candidates": [
+      {
+        "name": "Alexandre Souza",
+        "interview": "Scrum Master",
+        "score": "75",
+        "date": "05/03/2021",
+        "id": 1,
+        "observations": "",
+        "status": "Entrevista agendada"
+      },
+      {
+        "name": "Victor Souza",
+        "interview": "Trainee Consultoria",
+        "score": "80",
+        "date": "2021-03-17",
+        "id": 3,
+        "observations": "",
+        "status": "Contratado"
+      },
+      {
+        "name": "tirulipa",
+        "interview": "brilhamucho",
+        "score": "1111",
+        "date": "2021-03-18",
+        "id": 4,
+        "observations": "",
+        "status": "Não compareceu"
+      }
+    ],
+    "interviews": [
+      {
+        "id": 1,
+        "category": "Front End",
+        "vacancy": "Desenvolvedor Angular Pl",
+        "questionnaire": "Questionário Front End 3"
+      },
+      {
+        "id": 2,
+        "category": "Front End",
+        "vacancy": "Desenvolvedor React Pl",
+        "questionnaire": "Questionário Front End 3"
+      },
+      {
+        "id": 3,
+        "category": "Back End",
+        "vacancy": "Desenvolvedor Java Jr",
+        "questionnaire": "Questionário Back End 2"
+      },
+      {
+        "id": 4,
+        "category": "Agile",
+        "vacancy": "Scrum Master",
+        "questionnaire": "Questionário Agile 3"
+      }
+    ],
+    "questionnaires": [
+      {
+        "id": 1,
+        "title": "Questionário Front End",
+        "difficulty": 2,
+        "category": "Front End",
+        "answers": [
+          "bad",
+          "regular",
+          "good",
+          "excellent"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Questionário Back End 2",
+        "difficulty": 3,
+        "category": "Back End",
+        "answers": [
+          "bad",
+          "regular",
+          "good",
+          "excellent"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Questionário Agile 3",
+        "difficulty": 3,
+        "category": "Agile",
+        "answers": [
+          "bad",
+          "regular",
+          "good",
+          "excellent"
+        ]
+      }
+    ],
+  "questions": [
+          {"id": 1, "question": "pergunta FE 1", "questionnaireId": 1},
+          {"id": 2, "question": "pergunta FE 2", "questionnaireId": 1},
+          {"id": 3, "question": "pergunta FE 3", "questionnaireId": 1},
+          {"id": 4, "question": "pergunta FE 4", "questionnaireId": 1},
+          {"id": 5, "question": "pergunta FE 5", "questionnaireId": 1},
+          {"id": 6, "question": "pergunta FE 6", "questionnaireId": 1},
+          {"id": 7, "question": "pergunta FE 7", "questionnaireId": 1},
+          {"id": 8, "question": "pergunta FE 8", "questionnaireId": 1},
+          {"id": 9, "question": "pergunta FE 9", "questionnaireId": 1},
+          {"id": 10, "question": "pergunta FE 10", "questionnaireId": 1},
+  
+          {"id": 11, "question": "pergunta BE 1", "questionnaireId": 2},
+          {"id": 12, "question": "pergunta BE 2", "questionnaireId": 2},
+          {"id": 13, "question": "pergunta BE 3", "questionnaireId": 2},
+          {"id": 14, "question": "pergunta BE 4", "questionnaireId": 2},
+          {"id": 15, "question": "pergunta BE 5", "questionnaireId": 2},
+          {"id": 16, "question": "pergunta BE 6", "questionnaireId": 2},
+          {"id": 17, "question": "pergunta BE 7", "questionnaireId": 2},
+          {"id": 18, "question": "pergunta BE 8", "questionnaireId": 2},
+          {"id": 19, "question": "pergunta BE 9", "questionnaireId": 2},
+          {"id": 20, "question": "pergunta BE 10", "questionnaireId": 2},
+  
+          {"id": 21, "question": "pergunta AM 1", "questionnaireId": 3},
+          {"id": 22, "question": "pergunta AM 2", "questionnaireId": 3},
+          {"id": 23, "question": "pergunta AM 3", "questionnaireId": 3},
+          {"id": 24, "question": "pergunta AM 4", "questionnaireId": 3},
+          {"id": 25, "question": "pergunta AM 5", "questionnaireId": 3},
+          {"id": 26, "question": "pergunta AM 6", "questionnaireId": 3},
+          {"id": 27, "question": "pergunta AM 7", "questionnaireId": 3},
+          {"id": 28, "question": "pergunta AM 8", "questionnaireId": 3},
+          {"id": 29, "question": "pergunta AM 9", "questionnaireId": 3},
+          {"id": 30, "question": "pergunta AM 10", "questionnaireId": 3}
+        ]
+  }

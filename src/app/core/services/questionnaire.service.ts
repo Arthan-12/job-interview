@@ -17,7 +17,7 @@ export class QuestionnaireService {
 
     constructor(private http: HttpClient) {}
 
-    findById(questionnaireId: number) {
+    findById(questionnaireId: number): Observable<Questionnaire> {
         return this.http.get<Questionnaire>(this.API_URL + '/' + questionnaireId)
     }
 
@@ -35,6 +35,10 @@ export class QuestionnaireService {
 
     editQuestionaire(id: number, questionnaire: Questionnaire): Observable<Questionnaire> {
         return this.http.put<Questionnaire>(this.API_URL + '/' + id, JSON.stringify(questionnaire), this.httpOptions)
+    }
+
+    editQuestion(id: number): Observable<Questionnaire> {
+        return this.http.put<Questionnaire>(this.API_URL + '/' + id, this.httpOptions)
     }
     
 }

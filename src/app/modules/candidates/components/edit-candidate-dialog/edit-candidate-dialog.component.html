@@ -7,7 +7,7 @@
     <div mat-dialog-content class="content">
       <div>
         <h1 id="form-title">{{data.formTitle}}</h1>
-        <form [formGroup]=" candidateForm" (ngSubmit)="submitForm()" novalidate>
+        <form [formGroup]="candidateForm" (ngSubmit)="submitForm()" novalidate>
             <div class="form-group">
                 <label class="input-name">Nome</label>
                 <input type="text" formControlName="name" class="form-control" value="{{data.name}}">
