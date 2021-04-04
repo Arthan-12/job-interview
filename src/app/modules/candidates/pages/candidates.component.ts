@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
@@ -18,14 +18,15 @@ export class CandidatesComponent implements OnInit {
   candidateUpdateForm: FormGroup;
   candidates: Candidate[] = [];
   candidate: Candidate;
+  candidateModel: Candidate;
   index: number;
   currentRow: number;
   candidate$: Observable<Candidate>;
-  candidateId: number;
-  candidateName: string;
-  candidateInterview: string;
-  candidateScore: number;
-  candidateDate: string;
+  // candidateId: number;
+  // candidateName: string;
+  // candidateInterview: string;
+  // candidateScore: number;
+  // candidateDate: string;
 
   constructor(
       public fb: FormBuilder,
@@ -54,12 +55,14 @@ export class CandidatesComponent implements OnInit {
     this.candidate = res;
     this.currentRow = i;
     this.candidate$ = this.candidateService.findById(this.candidate[i].id);
-    this.candidateId = this.candidate[i].id;
-    this.candidateName = this.candidate[i].name;
-    this.candidateInterview = this.candidate[i].interview;
-    this.candidateScore = this.candidate[i].score;
-    this.candidateDate = this.candidate[i].date;
-    console.log(this.candidate[i], this.candidateId);
+    this.candidateModel = {
+      id: this.candidate[i].id,
+      name: this.candidate[i].name,
+      interview: this.candidate[i].interview,
+      score: this.candidate[i].score,
+      date: this.candidate[i].date
+    }
+    console.log(this.candidate[i]);
     })
   }
 
@@ -70,7 +73,7 @@ export class CandidatesComponent implements OnInit {
       })
       .afterClosed().subscribe((result) => {
         if(result == true) {
-        this.candidateService.deleteCandidate(this.candidateId).subscribe()
+        this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
         this.refreshCandidateTable()
         }
         
@@ -79,14 +82,14 @@ export class CandidatesComponent implements OnInit {
   }
 
   updateCandidate(): void {
-    console.log(this.candidateId)
+    console.log(this.candidateModel.id)
     this.dialog.open(EditCandidateDialogComponent, {data: {
       formTitle: ['Editar dados do candidato'],
-      id: [this.candidateId], 
-      name: [this.candidateName],
-      interview: [this.candidateInterview],
-      score: [this.candidateScore],
-      date: [this.candidateDate]
+      id: this.candidateModel.id, 
+      name: this.candidateModel.name,
+      interview: this.candidateModel.interview,
+      score: this.candidateModel.score,
+      date: this.candidateModel.date
       }
     })
     .afterClosed().subscribe(() => {

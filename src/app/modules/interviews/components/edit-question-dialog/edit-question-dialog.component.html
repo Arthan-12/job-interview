@@ -1,0 +1,38 @@
+<a [mat-dialog-close]="false">
+    <span id="close-dialog">
+      <mat-icon>close</mat-icon>
+    </span>
+  </a>
+    <div class="container">
+      <div mat-dialog-content class="content">
+        <div>
+          <h1 id="form-title">{{data.formTitle}}</h1>
+          <form [formGroup]="questionForm" (ngSubmit)="submitForm()" novalidate>
+              <div class="form-group">
+                  <label class="input-name">Pergunta</label>
+                  <input type="text" formControlName="question" class="form-control" value="{{data.question}}">
+              </div>
+              <div class="form-group">
+                  
+                  <label class="input-name">Dificuldade</label>
+                  <select  formControlName="difficulty" class="form-control">
+                    <option *ngFor="let difficultyOption of difficultyOptions" [ngValue]="difficultyOption">
+                      {{difficultyOption}}
+                    </option>
+                  </select>
+               
+                   
+              </div>
+              <div class="form-group">
+                  <label class="input-name">Resposta esperada</label>
+                  <input type="text" formControlName="answer" class="form-control" value="{{data.answer}}">
+              </div>
+              <div class="button-group">
+              <button id="submit" type="submit" [mat-dialog-close]="false">
+                <mat-icon>check</mat-icon>
+              </button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>

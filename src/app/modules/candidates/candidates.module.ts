@@ -6,13 +6,12 @@ import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPag
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditCandidateDialogComponent } from './components/edit-candidate-dialog/edit-candidate-dialog.component';
-import { FormComponent } from './components/form/form.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 
 @NgModule({
-  declarations: [CandidatesComponent, EditCandidateDialogComponent, FormComponent, ConfirmDialogComponent],
+  declarations: [CandidatesComponent, EditCandidateDialogComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

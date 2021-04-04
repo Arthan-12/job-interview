@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
 
@@ -13,7 +12,6 @@ import { CandidateService } from 'src/app/core/services/candidates.service';
 })
 export class EditCandidateDialogComponent implements OnInit {
 
-  mySubscription: any;
   candidateForm: FormGroup;
   candidate: Candidate;
   candidate$: Observable<Candidate>;
@@ -47,12 +45,12 @@ submitForm() {
   if(this.data.formTitle == 'Inscreva um candidato') {
     this.candidateService.createCandidate(this.candidateForm.value)
     .subscribe(res =>
-      console.log('Candidate created!'))
+      console.log('Candidate created!'));
   } else if(this.data.formTitle == 'Editar dados do candidato') {
     this.candidateService.editCandidate(this.data.id, this.candidateForm.value)
-    .subscribe()
-    console.log(this.candidateForm.value)
-    console.log('Candidate modified!')
+    .subscribe();
+    console.log(this.candidateForm.value);
+    console.log('Candidate modified!');
   }
   
 }

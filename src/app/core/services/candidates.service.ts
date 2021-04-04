@@ -41,7 +41,7 @@ export class CandidateService {
         return this.http.put<Candidate>(this.API_URL + '/' + id, JSON.stringify(candidate), this.httpOptions);
     }
 
-    deleteCandidate(id: number) {
+    deleteCandidate(id: number): Observable<Candidate> {
         return this.http.delete<Candidate>(this.API_URL + '/' + id, this.httpOptions);
     }
 
