@@ -2,14 +2,15 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { filter, map, mergeMap, pluck, tap, toArray } from 'rxjs/operators';
+import { Interview } from 'src/app/core/models/interview.model';
 import { Question } from 'src/app/core/models/question.model';
 import { Questionnaire } from 'src/app/core/models/questionnaire.model';
-import { QuestionnaireService } from 'src/app/core/services/questionnaire.service';
 import { QuestionService } from 'src/app/core/services/questions.service';
 import { ConfirmDialogComponent } from 'src/app/modules/candidates/components/confirm-dialog/confirm-dialog.component';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { EditQuestionDialogComponent } from '../../edit-question-dialog/edit-question-dialog.component';
 
 @Component({
@@ -19,29 +20,33 @@ import { EditQuestionDialogComponent } from '../../edit-question-dialog/edit-que
 })
 export class DragAndDropComponent implements OnInit {
 
-  @Input() selectedOption
-
-  questionsArray: string[];
+  @Input() selectedOption: string;
+  //questionsArray: string[];
   questionnaire: Questionnaire;
+  interview: Interview;
+  question: Question;
+
   questionnaires$: Observable<Questionnaire[]>;
-  question$: Observable<Question>;
+  questions$: Observable<Question[]>;
+
   index: number;
   currentRow: number;
-  question: Question;
-  questions$: Observable<Question[]>;
-  questions: Question[] = [];
-  questionnaireId: number;
   questionIndex: number;
-  questionModel: Question;
-
+  
+  questions: Question[] = [];
+  data = "This is an example for passing data";
+  
   constructor(
-    private questionnaireService: QuestionnaireService,
     private questionService: QuestionService,
+    private snackBar: MatSnackBar,
 
     public fb: FormBuilder,
     public httpClient: HttpClient,
     private dialog: MatDialog,
-  ) { }
+  ) {
+    this.interview = {},
+    this.questionnaire = {}
+   }
 
   ngOnInit() {
     //this.questionnaires$ = this.questionnaireService.getAllQuestionnaires();
@@ -56,47 +61,37 @@ export class DragAndDropComponent implements OnInit {
     console.log(this.questions)
   }
 
+  getQuestionnaireId(interview: Interview, questionnaire: Questionnaire) {
+    if(interview.vacancy == 'Desenvolvedor Angular Pl') {
+      questionnaire.id = 1;
+    } else if (interview.vacancy == 'Desenvolvedor React Pl') {
+      questionnaire.id = 1;
+    } else if (interview.vacancy == 'Desenvolvedor Java Jr') {
+      questionnaire.id= 2;
+    } else if (interview.vacancy == 'Scrum Master') {
+      questionnaire.id = 3;
+    } return questionnaire.id
+  }
+
   getQuestions()  {
-    if(this.selectedOption == 'Scrum Master') {
-      this.questionnaireId = 3;
-      this.questions$ = this.questionService.findQuestionsByQuestionnaireId(3).pipe(
-        mergeMap((questions: Question[]) => questions),
-        map((question: Question) => ({
-          id: question.id,
-          question: question.question,
-          answer: question.answer,
-          difficulty: question.difficulty
-          //questionnaireId: question.questionnaireId
-        })),
-        toArray(),
-        tap((output) => console.log(output))
-      )} else if(this.selectedOption == 'Desenvolvedor React Pl') {
-        this.questionnaireId = 1;
-        this.questions$ = this.questionService.findQuestionsByQuestionnaireId(1).pipe(
-        mergeMap((questions: Question[]) => questions),
-        map((question: Question) => ({
-          id: question.id,
-          question: question.question,
-          answer: question.answer,
-          difficulty: question.difficulty
-          //questionnaireId: question.questionnaireId
-        })),
-        toArray(),
-        tap((output) => console.log(output))
-      )}
+    this.interview.vacancy = this.selectedOption;
+    this.getQuestionnaireId(this.interview, this.questionnaire);
+    console.log(this.interview, this.questionnaire.id)
+    this.questions$ = this.questionService.getQuestionsByInterview(this.questionnaire.id);
+    this.showBasicComponent('Tabela atualizada!', 'teste');
   }
 
   getQuestion(i: number) {
     this.currentRow = i;
     this.questionIndex = this.currentRow;
-    this.questionService.findQuestionsByQuestionnaireId(this.questionnaireId).subscribe(res => {
+    this.questionService.findQuestionsByQuestionnaireId(this.questionnaire.id).subscribe(res => {
       console.log(res[i])
       this.question = res[i];
     });
   }
 
   addQuestion() {
-    this.questionService.findQuestionsByQuestionnaireId(this.questionnaireId).subscribe(res  => {
+    this.questionService.findQuestionsByQuestionnaireId(this.questionnaire.id).subscribe(res  => {
       res.push(this.question);
       console.log(res);
     })
@@ -110,17 +105,17 @@ export class DragAndDropComponent implements OnInit {
     })
     .afterClosed().subscribe((result) => {
       if(result == true) {
-        this.questionService.deleteQuestion(this.question.id).subscribe();
+        this.questionService.deleteQuestion(this.question.id).subscribe((res) => console.log(res), (err) => console.log(err));
       }
-    })
+    }, (err) => console.log(err))
   }
 
-  onKey(event) {
-    const inputValue = event.target.value;
-    console.log(inputValue)
-    this.questionsArray = inputValue
-    return this.questionsArray
-  }
+  // onKey(event) {
+  //   const inputValue = event.target.value;
+  //   console.log(inputValue)
+  //   this.questionsArray = inputValue
+  //   return this.questionsArray
+  // }
 
   editQuestion() {
    this.dialog.open(EditQuestionDialogComponent, {data: {
@@ -143,7 +138,7 @@ export class DragAndDropComponent implements OnInit {
       id: null,
       question: '',
       difficulty: '',
-      questionnaireId: this.questionnaireId,
+      questionnaireId: this.questionnaire.id,
       answer: '',
       },
     })
@@ -156,5 +151,13 @@ export class DragAndDropComponent implements OnInit {
   refreshQuestionTable() {
       this.questionService.getAllQuestions().subscribe((data: Question[]) => 
       this.questions = data)
+  }
+
+  showBasicComponent(message: string, panelClass: string) {
+    this.data = "This is an example for passing data";
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      data: this.data,
+      duration: 2000
+    });
   }
 }

@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core"
 import { Observable } from "rxjs";
+import { mergeMap, map, toArray, tap } from "rxjs/operators";
+import { Interview } from "../models/interview.model";
 import { Question } from "../models/question.model";
-import { Questionnaire } from "../models/questionnaire.model";
+import { InterviewService } from "./interview.service";
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +18,7 @@ export class QuestionService {
         })
     }
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private interviewService: InterviewService) {}
 
     getAllQuestions(): Observable<Question[]> {
         return this.http.get<Question[]>(this.API_URL + '/questions');
@@ -24,6 +26,22 @@ export class QuestionService {
 
     getQuestion(): Observable<Question> {
         return this.http.get<Question>(this.API_URL + '/questions');
+    }
+
+    getQuestionsByInterview(questionnaireId: number): Observable<Question[]> {
+        this.findQuestionsByQuestionnaireId(questionnaireId).pipe(
+            mergeMap((questions: Question[]) => questions),
+            map((question: Question) => ({
+                id: question.id,
+                question: question.question,
+                answer: question.answer,
+                difficulty: question.difficulty
+                //questionnaireId: question.questionnaireId
+            })),
+            toArray(),
+            tap((output) => console.log(output))
+            )
+        return this.http.get<Question[]>(this.API_URL + '/questionnaires/' + questionnaireId + '/questions')
     }
 
     findQuestionsByQuestionnaireId(questionnaireId: number): Observable<Question[]> {

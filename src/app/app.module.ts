@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreModule } from './core/core.module';
-import { MenuModule } from './shared/menu/menu.module';
+import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './modules/home/home.module';
 import { CandidatesModule } from './modules/candidates/candidates.module';
@@ -14,7 +14,7 @@ import { InterviewsModule } from './modules/interviews/interviews.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +25,7 @@ import { InterviewsModule } from './modules/interviews/interviews.module';
     AppRoutingModule,
 
     CoreModule,
-    MenuModule,
+    SharedModule,
     ErrorsModule,
     HomeModule,
     CandidatesModule,

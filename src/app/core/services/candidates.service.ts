@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { identifierModuleUrl } from "@angular/compiler";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { Candidate } from "src/app/core/models/candidate.model";
 
 
@@ -11,11 +12,12 @@ import { Candidate } from "src/app/core/models/candidate.model";
 export class CandidateService {
 
     private readonly API_URL = 'http://localhost:3000/candidates'
-    httpOptions = {
+    private httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json; charset=utf-8'
         })
     }
+    
     candidates: Array<Candidate> = [];
     
     constructor(private http: HttpClient) {
@@ -42,9 +44,20 @@ export class CandidateService {
     }
 
     deleteCandidate(id: number): Observable<Candidate> {
-        return this.http.delete<Candidate>(this.API_URL + '/' + id, this.httpOptions);
+        return this.http.delete<Candidate>(this.API_URL + '/' + id, this.httpOptions).pipe(
+            catchError(this.errorHandler)
+            )
+        }
+        errorHandler(error) {
+           let errorMessage = '';
+           if(error.error instanceof ErrorEvent) {
+             // Get client-side error
+             errorMessage = error.error.message;
+           } else {
+             // Get server-side error
+             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+           }
+           console.log(errorMessage);
+           return throwError(errorMessage);
     }
-
-    
-
 }

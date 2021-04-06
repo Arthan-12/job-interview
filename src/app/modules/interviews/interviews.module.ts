@@ -6,11 +6,12 @@ import { RouterModule } from "@angular/router";
 import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule } from "@angular/material";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
-import { MenuModule } from "src/app/shared/menu/menu.module";
+import { SharedModule } from "src/app/shared/shared.module";
 import { InterviewComponent } from "./pages/interview/interview.component";
 import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop/drag-and-drop.component';
 import { EditQuestionDialogComponent } from './components/edit-question-dialog/edit-question-dialog.component';
 import { ConfirmDialogComponent } from "../candidates/components/confirm-dialog/confirm-dialog.component";
+import { SnackbarComponent } from "src/app/shared/components/snackbar/snackbar.component";
 
 
 
@@ -22,7 +23,7 @@ import { ConfirmDialogComponent } from "../candidates/components/confirm-dialog/
     FormsModule,
     RouterModule,
 
-    MenuModule,
+    SharedModule,
 
     MatIconModule,
     MatSelectModule,
@@ -32,6 +33,6 @@ import { ConfirmDialogComponent } from "../candidates/components/confirm-dialog/
     DragDropModule,
     MatDialogModule
  ],
- entryComponents: [EditQuestionDialogComponent, ConfirmDialogComponent],
+ entryComponents: [EditQuestionDialogComponent, ConfirmDialogComponent, SnackbarComponent],
 })
 export class InterviewsModule {}
