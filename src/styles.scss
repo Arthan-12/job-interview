@@ -12,3 +12,19 @@ body {
   font-size: 8pt;
   float: right;
 }
+
+.snackbar-success {
+  background: hsl(120, 100%, 25%);
+}
+
+.snackbar-edit {
+  background: hsl(47, 100%, 63%);
+}
+
+.snackbar-create {
+  background: hsl(262, 52%, 47%);
+}
+
+.snackbar-delete {
+  background: hsl(4, 90%, 58%)
+}

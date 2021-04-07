@@ -32,7 +32,7 @@
     },
     {
       "name": "Johnny",
-      "interview": "Went Down Georgia",
+      "interview": "Be Good",
       "score": "78",
       "date": "2021-04-12",
       "id": 6
@@ -299,6 +299,27 @@
       "difficulty": "difícil",
       "questionnaireId": 3,
       "answer": "resposta esperada AM 9"
+    },
+    {
+      "id": 34,
+      "question": "pergunta AM 10",
+      "difficulty": "médio",
+      "questionnaireId": 3,
+      "answer": "resposta esperada AM 10"
+    },
+    {
+      "id": 35,
+      "question": "pergunta AM 11",
+      "difficulty": "médio",
+      "questionnaireId": 3,
+      "answer": "resposta esperada AM 11"
+    },
+    {
+      "id": 36,
+      "question": "",
+      "difficulty": "",
+      "questionnaireId": 3,
+      "answer": ""
     }
   ]
 }

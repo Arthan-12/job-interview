@@ -1,9 +1,10 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA,  MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/core/models/question.model';
 import { QuestionService } from 'src/app/core/services/questions.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-edit-question-dialog',
@@ -27,7 +28,8 @@ export class EditQuestionDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     public fb: FormBuilder,
-    private questionService: QuestionService) {}
+    private questionService: QuestionService,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.questionForm = this.fb.group({
@@ -44,12 +46,22 @@ export class EditQuestionDialogComponent implements OnInit {
       this.questionService.addQuestion(this.questionForm.value)
       .subscribe(res =>
         console.log('Question created!'));
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          data: 'Pergunta criada com sucesso!',
+          duration: 2000,
+          panelClass: ['snackbar-create']
+        });
     }
     else if(this.data.formTitle == 'Editar pergunta') {
       this.questionService.editQuestion(this.data.id, this.questionForm.value)
       .subscribe()
       console.log(this.questionForm.value);
-      console.log('Question modified!')
+      console.log('Question modified!');
+      this.snackBar.openFromComponent(SnackbarComponent, {
+        data: 'Pergunta atualizada com sucesso!',
+        duration: 2000,
+        panelClass: ['snackbar-edit']
+      });
     }
   }
 

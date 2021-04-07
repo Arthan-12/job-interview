@@ -34,7 +34,6 @@ export class DragAndDropComponent implements OnInit {
   questionIndex: number;
   
   questions: Question[] = [];
-  data = "This is an example for passing data";
   
   constructor(
     private questionService: QuestionService,
@@ -78,7 +77,11 @@ export class DragAndDropComponent implements OnInit {
     this.getQuestionnaireId(this.interview, this.questionnaire);
     console.log(this.interview, this.questionnaire.id)
     this.questions$ = this.questionService.getQuestionsByInterview(this.questionnaire.id);
-    this.showBasicComponent('Tabela atualizada!', 'teste');
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      data: 'Tabela atualizada com sucesso!',
+      duration: 2000,
+      panelClass: ['snackbar-success']
+    });
   }
 
   getQuestion(i: number) {
@@ -94,7 +97,7 @@ export class DragAndDropComponent implements OnInit {
     this.questionService.findQuestionsByQuestionnaireId(this.questionnaire.id).subscribe(res  => {
       res.push(this.question);
       console.log(res);
-    })
+    });
   }
 
   deleteQuestion() {
@@ -107,7 +110,12 @@ export class DragAndDropComponent implements OnInit {
       if(result == true) {
         this.questionService.deleteQuestion(this.question.id).subscribe((res) => console.log(res), (err) => console.log(err));
       }
-    }, (err) => console.log(err))
+      this.snackBar.openFromComponent(SnackbarComponent, {
+        data: 'Tabela atualizada com sucesso!',
+        duration: 2000,
+        panelClass: ['snackbar-delete']
+      });
+    })
   }
 
   // onKey(event) {
@@ -129,7 +137,7 @@ export class DragAndDropComponent implements OnInit {
     })
     .afterClosed().subscribe(() => {
       this.refreshQuestionTable()
-    })
+    });
   }
 
   openDialog() {
@@ -153,11 +161,4 @@ export class DragAndDropComponent implements OnInit {
       this.questions = data)
   }
 
-  showBasicComponent(message: string, panelClass: string) {
-    this.data = "This is an example for passing data";
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: this.data,
-      duration: 2000
-    });
-  }
 }

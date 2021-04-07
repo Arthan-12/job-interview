@@ -13,7 +13,7 @@ export class SnackbarComponent {
     public data: any
 ) { }
 
-ngOnInit() {
-}
+  ngOnInit() {
+  }
 
 }

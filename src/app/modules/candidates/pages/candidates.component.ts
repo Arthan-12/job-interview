@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { EditCandidateDialogComponent } from '../components/edit-candidate-dialog/edit-candidate-dialog.component';
 
@@ -32,7 +33,8 @@ export class CandidatesComponent implements OnInit {
       public fb: FormBuilder,
       public httpClient: HttpClient,
       private dialog: MatDialog,
-      private candidateService: CandidateService
+      private candidateService: CandidateService,
+      private snackBar: MatSnackBar
      
   ) { }
    
@@ -74,6 +76,11 @@ export class CandidatesComponent implements OnInit {
       .afterClosed().subscribe((result) => {
         if(result == true) {
         this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          data: 'Candidato deletado com sucesso!',
+          duration: 2000,
+          panelClass: ['snackbar-delete']
+        });
         this.refreshCandidateTable()
         }
         
