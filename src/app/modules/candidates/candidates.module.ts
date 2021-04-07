@@ -7,11 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditCandidateDialogComponent } from './components/edit-candidate-dialog/edit-candidate-dialog.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { SearchCandidateComponent } from './components/search-candidate/search-candidate.component';
+import { SearchCandidatePipe } from './components/search-candidate/search-candidate.pipe';
 
 
 
 @NgModule({
-  declarations: [CandidatesComponent, EditCandidateDialogComponent, ConfirmDialogComponent],
+  declarations: [CandidatesComponent, EditCandidateDialogComponent, ConfirmDialogComponent, SearchCandidateComponent, SearchCandidatePipe],
   imports: [
     CommonModule,
     ReactiveFormsModule,

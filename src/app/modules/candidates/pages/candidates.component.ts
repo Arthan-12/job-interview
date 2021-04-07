@@ -16,6 +16,7 @@ import { EditCandidateDialogComponent } from '../components/edit-candidate-dialo
 })
 export class CandidatesComponent implements OnInit {
 
+  @Input() searchCandidate: string;
   candidateUpdateForm: FormGroup;
   candidates: Candidate[] = [];
   candidate: Candidate;
@@ -125,5 +126,5 @@ export class CandidatesComponent implements OnInit {
       this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
       this.candidates = data)
   }
-  
+
 }

@@ -15,6 +15,9 @@
                 <mat-icon>update</mat-icon>
             </button>
         </div>
+        <div class="search-candidate">
+            <input type="search" placeholder="Pesquisar por candidato" [(ngModel)]="searchCandidate">
+        </div>
         <table class="mat-elevation-z8">
             <thead>
                 <tr>
@@ -25,7 +28,7 @@
                 </tr>
             </thead>
             <tbody class="tab-candidatos-content">
-                <tr *ngFor="let candidate of candidates; let i = index"(click)="getCandidate(i)" [class.current-row]= "i == currentRow">
+                <tr *ngFor="let candidate of candidates | candidateFilter:searchCandidate; let i = index"(click)="getCandidate(i)" [class.current-row]= "i == currentRow">
                     <td>{{candidate.name}}</td>
                     <td>{{candidate.interview}}</td>
                     <td>{{candidate.score}}</td>
