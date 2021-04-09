@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Candidate } from 'src/app/core/models/candidate.model';
+import { Interview } from 'src/app/core/models/interview.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
+import { InterviewService } from 'src/app/core/services/interview.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
 @Component({
@@ -15,17 +17,22 @@ export class EditCandidateDialogComponent implements OnInit {
 
   candidateForm: FormGroup;
   candidate: Candidate;
+
+  interviews$: Observable<Interview[]>;
   candidate$: Observable<Candidate>;
+
   index: number
   
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     public fb: FormBuilder,
+    private interviewsService: InterviewService,
     private candidateService: CandidateService,
     private snackBar: MatSnackBar) {}
 
   ngOnInit() {
+    this.interviews$ = this.interviewsService.getAllInterviews();
     this.candidateForm = this.fb.group({
     name: this.data.name,
     interview: this.data.interview,

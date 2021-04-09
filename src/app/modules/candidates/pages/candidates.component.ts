@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
+import { map, mergeMap, tap, toArray } from 'rxjs/operators';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -24,11 +25,7 @@ export class CandidatesComponent implements OnInit {
   index: number;
   currentRow: number;
   candidate$: Observable<Candidate>;
-  // candidateId: number;
-  // candidateName: string;
-  // candidateInterview: string;
-  // candidateScore: number;
-  // candidateDate: string;
+  candidates$: Observable<Candidate[]>;
 
   constructor(
       public fb: FormBuilder,
@@ -41,16 +38,17 @@ export class CandidatesComponent implements OnInit {
    
 
   ngOnInit(): void {
+    this.candidates$ = this.candidateService.getAllCandidates();
     this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
-      console.log(data);
-      this.candidates = data
-    });
+       console.log(data);
+       this.candidates = data
+     });
     this.candidateUpdateForm = this.fb.group({
       name: [''],
       interview: [''],
       score: [''],
       date: [''],    
-    })
+    });
   }
 
   getCandidate(i: number) {
@@ -125,6 +123,26 @@ export class CandidatesComponent implements OnInit {
   refreshCandidateTable() {
       this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
       this.candidates = data)
+  }
+
+  orderByName() {
+    this.candidateService.getAllCandidates().pipe(
+     
+      mergeMap((candidates: Candidate[]) => candidates),
+      map((candidate: Candidate) => ({
+        name: candidate.name.toLocaleLowerCase(),
+        interview: candidate.interview,
+        score: candidate.score,
+        date: candidate.date
+      })),
+      toArray(),
+      tap(output => {
+        output.sort((a, b) => {
+          return a.name < b.name ? -1 : 1;
+        });
+        this.candidates = output
+        console.log(output)})
+    ).subscribe();
   }
 
 }

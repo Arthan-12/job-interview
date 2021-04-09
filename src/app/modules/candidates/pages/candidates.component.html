@@ -17,14 +17,39 @@
         </div>
         <div class="search-candidate">
             <input type="search" placeholder="Pesquisar por candidato" [(ngModel)]="searchCandidate">
+            
         </div>
         <table class="mat-elevation-z8">
             <thead>
                 <tr>
-                    <th>NOME</th>
-                    <th>ENTREVISTA</th>
-                    <th>SCORE</th>
-                    <th>DATA</th>
+                    <th>NOME
+                        <a (click)="orderByName()">
+                            <mat-icon>
+                               reorder
+                            </mat-icon>
+                        </a>
+                    </th>
+                    <th>ENTREVISTA
+                        <a (click)="orderByInterview()">
+                            <mat-icon>
+                               reorder
+                            </mat-icon>
+                        </a>
+                    </th>
+                    <th>SCORE
+                        <a (click)="orderByScore()">
+                            <mat-icon>
+                               reorder
+                            </mat-icon>
+                        </a>
+                    </th>
+                    <th>DATA
+                        <a (click)="orderByDate()">
+                            <mat-icon>
+                               reorder
+                            </mat-icon>
+                        </a>
+                    </th>
                 </tr>
             </thead>
             <tbody class="tab-candidatos-content">

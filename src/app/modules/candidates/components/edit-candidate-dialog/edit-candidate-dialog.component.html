@@ -14,7 +14,11 @@
             </div>
             <div class="form-group">
                 <label class="input-name">Entrevista</label>
-                  <input type="text" formControlName="interview" class="form-control" value="{{data.interview}}">
+                <mat-select formControlName="interview">
+                  <mat-option *ngFor="let interview of interviews$ | async as interviews" [value]="interview.vacancy">
+                    {{interview.vacancy}}
+                  </mat-option>
+                </mat-select>
             </div>
             <div class="form-group">
                 <label class="input-name">Score</label>
