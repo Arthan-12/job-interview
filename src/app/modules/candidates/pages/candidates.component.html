@@ -52,8 +52,12 @@
                     </th>
                 </tr>
             </thead>
-            <tbody class="tab-candidatos-content">
-                <tr *ngFor="let candidate of candidates | candidateFilter:searchCandidate; let i = index"(click)="getCandidate(i)" [class.current-row]= "i == currentRow">
+            <tbody class="tab-candidatos-content" *ngIf="candidates$ | async as candidates">
+                <tr *ngFor="let candidate of candidates |
+                            candidateFilter:searchCandidate; index as i;
+                            trackBy: trackByFunction"
+                            (click)="getCandidate(i)"
+                            [class.current-row]= "i == currentRow">
                     <td>{{candidate.name}}</td>
                     <td>{{candidate.interview}}</td>
                     <td>{{candidate.score}}</td>

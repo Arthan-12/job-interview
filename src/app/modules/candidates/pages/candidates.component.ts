@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { debounce, debounceTime, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -18,14 +18,19 @@ import { EditCandidateDialogComponent } from '../components/edit-candidate-dialo
 export class CandidatesComponent implements OnInit {
 
   @Input() searchCandidate: string;
+
   candidateUpdateForm: FormGroup;
   candidates: Candidate[] = [];
   candidate: Candidate;
   candidateModel: Candidate;
-  index: number;
+  //index: number;
   currentRow: number;
   candidate$: Observable<Candidate>;
   candidates$: Observable<Candidate[]>;
+
+  //subscription: Subscription;
+
+  newCandidateList: Candidate[];
 
   constructor(
       public fb: FormBuilder,
@@ -38,33 +43,14 @@ export class CandidatesComponent implements OnInit {
    
 
   ngOnInit(): void {
+    //this.candidateService.getAllCandidates().subscribe();
     this.candidates$ = this.candidateService.getAllCandidates();
-    this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => {
-       console.log(data);
-       this.candidates = data
-     });
     this.candidateUpdateForm = this.fb.group({
       name: [''],
       interview: [''],
       score: [''],
       date: [''],    
     });
-  }
-
-  getCandidate(i: number) {
-    this.candidateService.getCandidate().subscribe((res) => {
-    this.candidate = res;
-    this.currentRow = i;
-    this.candidate$ = this.candidateService.findById(this.candidate[i].id);
-    this.candidateModel = {
-      id: this.candidate[i].id,
-      name: this.candidate[i].name,
-      interview: this.candidate[i].interview,
-      score: this.candidate[i].score,
-      date: this.candidate[i].date
-    }
-    console.log(this.candidate[i]);
-    })
   }
 
   deleteCandidate() {
@@ -74,13 +60,14 @@ export class CandidatesComponent implements OnInit {
       })
       .afterClosed().subscribe((result) => {
         if(result == true) {
-        this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
+        console.log(this.candidateModel.id);
+        //this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
         this.snackBar.openFromComponent(SnackbarComponent, {
           data: 'Candidato deletado com sucesso!',
           duration: 2000,
           panelClass: ['snackbar-delete']
         });
-        this.refreshCandidateTable()
+        this.refreshCandidateTable();
         }
         
       }
@@ -99,7 +86,7 @@ export class CandidatesComponent implements OnInit {
       }
     })
     .afterClosed().subscribe(() => {
-      this.refreshCandidateTable()
+      this.refreshCandidateTable();
     })
   }
 
@@ -121,28 +108,65 @@ export class CandidatesComponent implements OnInit {
   }
 
   refreshCandidateTable() {
-      this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
-      this.candidates = data)
+    this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
+    this.candidates = data);
+    this.candidates$ = this.candidateService.getAllCandidates();
   }
 
   orderByName() {
-    this.candidateService.getAllCandidates().pipe(
+    //let newCandidatesList = [];
+    this.candidates$ = this.candidateService.getAllCandidates().pipe(
      
       mergeMap((candidates: Candidate[]) => candidates),
       map((candidate: Candidate) => ({
-        name: candidate.name.toLocaleLowerCase(),
+        id: candidate.id,
+        name: candidate.name,
         interview: candidate.interview,
         score: candidate.score,
         date: candidate.date
       })),
       toArray(),
       tap(output => {
-        output.sort((a, b) => {
-          return a.name < b.name ? -1 : 1;
-        });
+        output.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
+        );
         this.candidates = output
-        console.log(output)})
-    ).subscribe();
+        //this.candidates.reduce((newCandidatesList, candidates) => newCandidatesList.concat(candidates), []);
+        console.log(output.map((candidate) => candidate.id))
+        return this.candidates
+      })
+      
+    );
+    
+    //console.log(this.candidates)
+  }
+
+  trackByFunction(i: number, candidate: Candidate) {
+    this.currentRow = i;
+    candidate ? candidate.id : null;
+    this.candidate = candidate;
+    console.log(candidate.id, this.candidate)
+    //return this.candidate
+    // console.log(i)
+    // return i
+  }
+
+  // getCandidate(i: number) {
+  //   this.currentRow = i;
+  
+    
+  //   console.log(this.candidate[i]);
+  // }
+
+  getCandidate(i: number) {
+    this.currentRow = i;
+    //this.candidate$ = this.candidateService.findById(this.candidate[i].id);
+     this.candidateService.getCandidate().subscribe((res) => {
+     this.candidate = res;
+     this.candidate$ = this.candidateService.getCandidate();
+    //this.candidate$ = this.candidateService.findById(this.candidate[i].id);
+    this.candidateModel = this.candidate[i];
+    console.log(this.candidate[i]);
+    });
   }
 
 }

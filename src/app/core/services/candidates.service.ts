@@ -43,6 +43,10 @@ export class CandidateService {
         return this.http.put<Candidate>(this.API_URL + '/' + id, JSON.stringify(candidate), this.httpOptions);
     }
 
+    editAllCandidates(ids: number[]): Observable<Candidate[]> {
+        return this.http.put<Candidate[]>(this.API_URL + '/' + ids, this.httpOptions);
+    }
+
     deleteCandidate(id: number): Observable<Candidate> {
         return this.http.delete<Candidate>(this.API_URL + '/' + id, this.httpOptions).pipe(
             catchError(this.errorHandler)
