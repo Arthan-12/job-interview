@@ -56,7 +56,7 @@
                 <tr *ngFor="let candidate of candidates |
                             candidateFilter:searchCandidate; index as i;
                             trackBy: trackByFunction"
-                            (click)="getCandidate(i)"
+                            (click)="getCandidate(candidate, i)"
                             [class.current-row]= "i == currentRow">
                     <td>{{candidate.name}}</td>
                     <td>{{candidate.interview}}</td>

@@ -23,7 +23,7 @@ export class CandidatesComponent implements OnInit {
   candidates: Candidate[] = [];
   candidate: Candidate;
   candidateModel: Candidate;
-  //index: number;
+  index: number;
   currentRow: number;
   candidate$: Observable<Candidate>;
   candidates$: Observable<Candidate[]>;
@@ -61,7 +61,7 @@ export class CandidatesComponent implements OnInit {
       .afterClosed().subscribe((result) => {
         if(result == true) {
         console.log(this.candidateModel.id);
-        //this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
+        this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
         this.snackBar.openFromComponent(SnackbarComponent, {
           data: 'Candidato deletado com sucesso!',
           duration: 2000,
@@ -87,6 +87,7 @@ export class CandidatesComponent implements OnInit {
     })
     .afterClosed().subscribe(() => {
       this.refreshCandidateTable();
+      this.currentRow = null;
     })
   }
 
@@ -144,29 +145,20 @@ export class CandidatesComponent implements OnInit {
     this.currentRow = i;
     candidate ? candidate.id : null;
     this.candidate = candidate;
-    console.log(candidate.id, this.candidate)
-    //return this.candidate
-    // console.log(i)
-    // return i
+    //console.log(candidate.id, this.candidate)
+    return this.candidate
   }
 
-  // getCandidate(i: number) {
-  //   this.currentRow = i;
-  
-    
-  //   console.log(this.candidate[i]);
-  // }
-
-  getCandidate(i: number) {
+  getCandidate(candidate: Candidate, i) {
     this.currentRow = i;
     //this.candidate$ = this.candidateService.findById(this.candidate[i].id);
-     this.candidateService.getCandidate().subscribe((res) => {
-     this.candidate = res;
-     this.candidate$ = this.candidateService.getCandidate();
+    //  this.candidateService.getCandidate().subscribe((res) => {
+    //  this.candidate = res;
+    //  this.candidate$ = this.candidateService.getCandidate();
     //this.candidate$ = this.candidateService.findById(this.candidate[i].id);
-    this.candidateModel = this.candidate[i];
-    console.log(this.candidate[i]);
-    });
+    this.candidateModel = candidate;
+    console.log(this.candidateModel);
+    //});
   }
 
 }
