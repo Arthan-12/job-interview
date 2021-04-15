@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import * as moment from 'moment';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { debounce, debounceTime, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import { Candidate } from 'src/app/core/models/candidate.model';
@@ -43,7 +44,6 @@ export class CandidatesComponent implements OnInit {
    
 
   ngOnInit(): void {
-    //this.candidateService.getAllCandidates().subscribe();
     this.candidates$ = this.candidateService.getAllCandidates();
     this.candidateUpdateForm = this.fb.group({
       name: [''],
@@ -51,6 +51,7 @@ export class CandidatesComponent implements OnInit {
       score: [''],
       date: [''],    
     });
+    this.orderByName();
   }
 
   deleteCandidate() {
@@ -112,10 +113,10 @@ export class CandidatesComponent implements OnInit {
     this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
     this.candidates = data);
     this.candidates$ = this.candidateService.getAllCandidates();
+    this.orderByName();
   }
 
   orderByName() {
-    //let newCandidatesList = [];
     this.candidates$ = this.candidateService.getAllCandidates().pipe(
      
       mergeMap((candidates: Candidate[]) => candidates),
@@ -131,34 +132,66 @@ export class CandidatesComponent implements OnInit {
         output.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
         );
         this.candidates = output
-        //this.candidates.reduce((newCandidatesList, candidates) => newCandidatesList.concat(candidates), []);
         console.log(output.map((candidate) => candidate.id))
         return this.candidates
       })
-      
     );
     
-    //console.log(this.candidates)
+  }
+
+  orderByInterview() {
+    this.candidates$ = this.candidateService.getAllCandidates().pipe(
+     
+      mergeMap((candidates: Candidate[]) => candidates),
+      map((candidate: Candidate) => ({
+        id: candidate.id,
+        name: candidate.name,
+        interview: candidate.interview,
+        score: candidate.score,
+        date: candidate.date
+      })),
+      toArray(),
+      tap(output => {
+        output.sort((a, b) => (a.interview.toLowerCase() < b.interview.toLowerCase() ? -1 : 1)
+        );
+        this.candidates = output
+        return this.candidates
+      })
+    );
+  }
+
+  orderByScore() {
+    this.candidates$ = this.candidateService.getAllCandidates().pipe(
+     
+      mergeMap((candidates: Candidate[]) => candidates),
+      map((candidate: Candidate) => ({
+        id: candidate.id,
+        name: candidate.name,
+        interview: candidate.interview,
+        score: candidate.score,
+        date: candidate.date
+      })),
+      toArray(),
+      tap(output => {
+        output.sort((a, b) => (b.score - a.score)
+        );
+        this.candidates = output
+        return this.candidates
+      })
+    );
   }
 
   trackByFunction(i: number, candidate: Candidate) {
     this.currentRow = i;
     candidate ? candidate.id : null;
     this.candidate = candidate;
-    //console.log(candidate.id, this.candidate)
     return this.candidate
   }
 
   getCandidate(candidate: Candidate, i) {
     this.currentRow = i;
-    //this.candidate$ = this.candidateService.findById(this.candidate[i].id);
-    //  this.candidateService.getCandidate().subscribe((res) => {
-    //  this.candidate = res;
-    //  this.candidate$ = this.candidateService.getCandidate();
-    //this.candidate$ = this.candidateService.findById(this.candidate[i].id);
     this.candidateModel = candidate;
     console.log(this.candidateModel);
-    //});
   }
 
 }

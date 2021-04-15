@@ -4,10 +4,8 @@
       "name": "Alexandre Souza",
       "interview": "Scrum Master",
       "score": "75",
-      "date": "05/03/2021",
-      "id": 1,
-      "observations": "",
-      "status": "Entrevista agendada"
+      "date": "2021-04-20",
+      "id": 1
     },
     {
       "name": "Victor Souza",
@@ -31,13 +29,6 @@
       "id": 7
     },
     {
-      "name": "teste",
-      "interview": "Desenvolvedor Angular Pl",
-      "score": "teste",
-      "date": "2021-04-21",
-      "id": 8
-    },
-    {
       "name": "Zé",
       "interview": "Desenvolvedor Java Jr",
       "score": "55",
@@ -50,6 +41,13 @@
       "score": "44",
       "date": "2021-04-19",
       "id": 11
+    },
+    {
+      "name": "Wilsan",
+      "interview": "Desenvolvedor React Pl",
+      "score": "55",
+      "date": "2021-04-19",
+      "id": 12
     }
   ],
   "interviews": [
