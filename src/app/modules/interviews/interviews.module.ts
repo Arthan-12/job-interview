@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
-import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule } from "@angular/material";
+import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatTooltipModule } from "@angular/material";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { SharedModule } from "src/app/shared/shared.module";
@@ -31,7 +31,8 @@ import { SnackbarComponent } from "src/app/shared/components/snackbar/snackbar.c
     MatFormFieldModule,
     MatButtonModule,
     DragDropModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
  ],
  entryComponents: [EditQuestionDialogComponent, ConfirmDialogComponent, SnackbarComponent],
 })

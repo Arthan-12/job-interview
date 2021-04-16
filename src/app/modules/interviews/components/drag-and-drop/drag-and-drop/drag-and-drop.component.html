@@ -1,14 +1,27 @@
 <div class="tools">
-    <button id="btn-get" class="crud-action-btn" mat-fab color="primary" (click)="getQuestions()" [disabled]= "selectedOption == undefined ? true: false">
+    <button id="btn-get" class="crud-action-btn"
+            matTooltip="Buscar questionário selecionado" matTooltipPosition="below" matTooltipClass="green-tooltip"
+            mat-fab color="primary"
+            (click)="getQuestions()"
+            [disabled]= "selectedOption == undefined ? true: false">
         <mat-icon>description</mat-icon>
     </button>
-    <button id="btn-add" class="crud-action-btn" mat-fab color="primary" (click)="openDialog()" [disabled]= "selectedOption == undefined ? true: false">
+    <button id="btn-add" class="crud-action-btn"
+            mat-fab color="primary"
+            (click)="openDialog()"
+            [disabled]= "selectedOption == undefined ? true: false">
         <mat-icon>add</mat-icon>
     </button>
-    <button id="btn-delete" class="crud-action-btn" mat-fab color="warn" (click)="deleteQuestion()" [disabled]= "i== currentRow ? true: false">
+    <button id="btn-delete" class="crud-action-btn"
+            mat-fab color="warn"
+            (click)="deleteQuestion()"
+            [disabled]= "i== currentRow ? true: false">
         <mat-icon>delete</mat-icon>
     </button>
-    <button id="btn-update"class="crud-action-btn" mat-fab color="accent" type="submit" (click)="editQuestion()" [disabled]= "i== currentRow ? true: false">
+    <button id="btn-update"class="crud-action-btn"
+            mat-fab color="accent" type="submit"
+            (click)="editQuestion()"
+            [disabled]= "i== currentRow ? true: false">
         <mat-icon>update</mat-icon>
     </button>
 </div>
@@ -20,15 +33,19 @@
             <th>RESPOSTA ESPERADA</th>
         </tr>
     </thead>
-    <tbody class="tab-perguntas-content">
-        <tr *ngFor="let question of questions$ | async as questions; let i = index"(click)="getQuestion(i)" [class.current-row]= "i == currentRow">
-            <td>{{question?.question}}</td>
-            <td>{{question?.answer}}</td>
-            <td>{{question?.difficulty}}</td>
-        </tr>
+    <tbody class="tab-perguntas-content"
+            cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="questions">
+            <tr *ngFor="let question of questions$ | async as questions;
+                        let i = index"
+                        (click)="getQuestion(question, i)"
+                        [class.current-row]= "i == currentRow"
+                        cdkDrag>
+                <td>{{question?.question}}</td>
+                <td>{{question?.answer}}</td>
+                <td>{{question?.difficulty}}</td>
+            </tr>
     </tbody>
 </table>
-
 <!--<div cdkDropList class="question-list" (cdkDropListDropped)="drop($event)" [cdkDropListData]="questions">
     <div class="example-box"   *ngFor="let question of questions$ | async as questions; let i = index"
         (click)="getQuestion(i)"

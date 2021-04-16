@@ -188,7 +188,7 @@ export class CandidatesComponent implements OnInit {
     return this.candidate
   }
 
-  getCandidate(candidate: Candidate, i) {
+  getCandidate(candidate: Candidate, i: number) {
     this.currentRow = i;
     this.candidateModel = candidate;
     console.log(this.candidateModel);

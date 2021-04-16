@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 
-import { MatIconModule, MatToolbarModule } from '@angular/material';
+import { MatIconModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 
 
 
@@ -21,7 +21,8 @@ import { MatIconModule, MatToolbarModule } from '@angular/material';
     RouterModule,
 
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class CoreModule { }

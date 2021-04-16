@@ -156,9 +156,9 @@
     {
       "id": 9,
       "question": "pergunta FE 9",
+      "difficulty": "médio",
       "questionnaireId": 1,
-      "answer": "resposta esperada FE 9",
-      "difficulty": "difícil"
+      "answer": "resposta esperada FE 9"
     },
     {
       "id": 10,
@@ -254,9 +254,9 @@
     {
       "id": 23,
       "question": "pergunta AM 3",
+      "difficulty": "fácil",
       "questionnaireId": 3,
-      "answer": "resposta esperada AM 3",
-      "difficulty": "médio"
+      "answer": "resposta esperada AM 3"
     },
     {
       "id": 24,
@@ -308,7 +308,7 @@
     {
       "id": 33,
       "question": "pergunta AM 9",
-      "difficulty": "difícil",
+      "difficulty": "médio",
       "questionnaireId": 3,
       "answer": "resposta esperada AM 9"
     },
@@ -332,6 +332,13 @@
       "difficulty": "",
       "questionnaireId": 3,
       "answer": ""
+    },
+    {
+      "id": 37,
+      "question": "pergunta FE 11",
+      "difficulty": "difícil",
+      "questionnaireId": 1,
+      "answer": "respostas esperada FE 11"
     }
   ]
 }

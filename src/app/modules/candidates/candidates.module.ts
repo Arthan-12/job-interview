@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CandidatesComponent } from './pages/candidates.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatTableModule, MatTooltipModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditCandidateDialogComponent } from './components/edit-candidate-dialog/edit-candidate-dialog.component';
@@ -29,7 +29,8 @@ import { SearchCandidatePipe } from './components/search-candidate/search-candid
     MatSortModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   entryComponents: [EditCandidateDialogComponent, ConfirmDialogComponent],
   providers: [],

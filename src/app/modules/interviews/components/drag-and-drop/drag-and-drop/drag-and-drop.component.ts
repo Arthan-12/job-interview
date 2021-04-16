@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { filter, map, mergeMap, pluck, tap, toArray } from 'rxjs/operators';
 import { Interview } from 'src/app/core/models/interview.model';
 import { Question } from 'src/app/core/models/question.model';
@@ -48,12 +48,8 @@ export class DragAndDropComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.questionnaires$ = this.questionnaireService.getAllQuestionnaires();
-    //this.getQuestions();
-
-    //this.questions$.subscribe(data => this.questionnaires.push({questions: data}))
+    
   }
-
   
   drop(event: CdkDragDrop<Question[]>) {
     moveItemInArray(this.questions, event.previousIndex, event.currentIndex);
@@ -61,9 +57,7 @@ export class DragAndDropComponent implements OnInit {
   }
 
   getQuestionnaireId(interview: Interview, questionnaire: Questionnaire) {
-    if(interview.vacancy == 'Desenvolvedor Angular Pl') {
-      questionnaire.id = 1;
-    } else if (interview.vacancy == 'Desenvolvedor React Pl') {
+    if(interview.vacancy == 'Desenvolvedor Angular Pl' || interview.vacancy == 'Desenvolvedor React Pl') {
       questionnaire.id = 1;
     } else if (interview.vacancy == 'Desenvolvedor Java Jr') {
       questionnaire.id= 2;
@@ -82,15 +76,14 @@ export class DragAndDropComponent implements OnInit {
       duration: 2000,
       panelClass: ['snackbar-success']
     });
+    this.observableToArray()
   }
 
-  getQuestion(i: number) {
+  getQuestion(question: Question, i: number) {
     this.currentRow = i;
     this.questionIndex = this.currentRow;
-    this.questionService.findQuestionsByQuestionnaireId(this.questionnaire.id).subscribe(res => {
-      console.log(res[i])
-      this.question = res[i];
-    });
+    this.question = question
+    console.log(this.question);
   }
 
   addQuestion() {
@@ -117,13 +110,6 @@ export class DragAndDropComponent implements OnInit {
       });
     })
   }
-
-  // onKey(event) {
-  //   const inputValue = event.target.value;
-  //   console.log(inputValue)
-  //   this.questionsArray = inputValue
-  //   return this.questionsArray
-  // }
 
   editQuestion() {
    this.dialog.open(EditQuestionDialogComponent, {data: {
@@ -157,8 +143,30 @@ export class DragAndDropComponent implements OnInit {
   }
 
   refreshQuestionTable() {
-      this.questionService.getAllQuestions().subscribe((data: Question[]) => 
-      this.questions = data)
+      this.questionService.getQuestionsByInterview(this.questionnaire.id).subscribe((data: Question[]) => 
+      this.questions = data);
+      this.questions$ = this.questionService.getQuestionsByInterview(this.questionnaire.id);
+  }
+
+  observableToArray() {
+    this.questions$ = this.questionService.getQuestionsByInterview(this.questionnaire.id).pipe(
+     
+      mergeMap((questions: Question[]) => questions),
+      map((question: Question) => ({
+        id: question.id,
+        question: question.question,
+        questionnaireId: question.questionnaireId,
+        difficulty: question.difficulty,
+        answer: question.answer
+      })),
+      toArray(),
+      tap(output => {
+        this.questions = output
+        console.log(output.map((question) => question.question))
+        return this.questions
+      })
+    );
+    
   }
 
 }

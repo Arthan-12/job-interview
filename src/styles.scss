@@ -28,3 +28,15 @@ body {
 .snackbar-delete {
   background: hsl(4, 90%, 58%)
 }
+
+.green-tooltip {
+  background: hsl(120, 100%, 25%);
+}
+
+.red-tooltip {
+  background: hsl(4, 90%, 58%)
+}
+
+.under-construction {
+  cursor: not-allowed;
+}
