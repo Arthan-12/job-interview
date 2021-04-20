@@ -1,0 +1,35 @@
+<div >
+    <div>
+        <h1>{{interviewTitle}}</h1>
+            <form [formGroup]="interviewForm" (ngSubmit)="submitForm()" novalidate>
+                <div class="form-group">
+                    <label class="input-name">Candidato</label>
+                    <select formControlName="candidateName" class="form-control">
+                    <option *ngFor="let candidate of candidates$ | async as candidates" [ngValue]="candidate.name">
+                        {{candidate.name}}
+                    </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-name">Vaga</label>
+                    <select formControlName="interviewVacancy" class="form-control">
+                    <option *ngFor="let interview of interviews$ | async as interviews" [ngValue]="interview.vacancy">
+                        {{interview.vacancy}}
+                    </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-name">Questionário</label>
+                    <select formControlName="questionnaireName" class="form-control">
+                    <option *ngFor="let questionnaire of questionnaires$ | async as questionnaires" [ngValue]="questionnaire.id">
+                        {{questionnaire.title}}
+                    </option>
+                    </select>
+                </div>
+                <button>Iniciar questionário</button>
+            </form>
+    </div>
+    <app-questions-carousel *ngIf=[isInterviewStarted] [questions]="questions" [animationType]="animationType"></app-questions-carousel>
+</div>

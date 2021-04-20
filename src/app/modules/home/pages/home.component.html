@@ -4,6 +4,7 @@
     </div>
     <div class="content">
         <h1>Bem vindo, {{user}}!</h1>
-        <app-date-card></app-date-card>
+        <button (click)="startInterview()">Iniciar uma entrevista!</button>
+            <app-start-interview *ngIf="isInterviewStarted"></app-start-interview>
     </div>
 </div>

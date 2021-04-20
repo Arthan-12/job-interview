@@ -4,4 +4,5 @@ export interface Interview {
     category?: string;
     vacancy?: string;
     questions?: string;
+    questionnaireId?: number;
 }

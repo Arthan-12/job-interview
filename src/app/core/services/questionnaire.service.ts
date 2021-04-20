@@ -29,6 +29,10 @@ export class QuestionnaireService {
         return this.http.get<Questionnaire>(this.API_URL);
     }
 
+    getQuestionnaireByInterview(interviewId: number): Observable<Questionnaire[]> {
+        return this.http.get<Questionnaire[]>(this.API_URL + '/' + interviewId + '/interviews')
+    }
+
     addQuestionaire(questionnaire: Questionnaire): Observable<Questionnaire> {
         return this.http.post<Questionnaire>(this.API_URL, JSON.stringify(questionnaire), this.httpOptions)
     }

@@ -55,32 +55,36 @@
       "id": 1,
       "category": "Front End",
       "vacancy": "Desenvolvedor Angular Pl",
-      "questionnaire": "Questionário Front End 3"
+      "questionnaire": "Questionário Front End 3",
+      "questionnaireId": "1"
     },
     {
       "id": 2,
       "category": "Front End",
       "vacancy": "Desenvolvedor React Pl",
-      "questionnaire": "Questionário Front End 3"
+      "questionnaire": "Questionário Front End 3",
+      "questionnaireId": "1"
     },
     {
       "id": 3,
       "category": "Back End",
       "vacancy": "Desenvolvedor Java Jr",
-      "questionnaire": "Questionário Back End 2"
+      "questionnaire": "Questionário Back End 2",
+      "questionnaireId": "2"
     },
     {
       "id": 4,
       "category": "Agile",
       "vacancy": "Scrum Master",
-      "questionnaire": "Questionário Agile 3"
+      "questionnaire": "Questionário Agile 3",
+      "questionnaireId": "3"
     }
   ],
   "questionnaires": [
     {
       "id": 1,
-      "title": "Questionário Front End",
-      "difficulty": 2,
+      "title": "Questionário Front End 3",
+      "difficulty": 3,
       "category": "Front End"
     },
     {

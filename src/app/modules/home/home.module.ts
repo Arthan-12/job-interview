@@ -6,11 +6,13 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./pages/home.component";
 import { DateCardComponent } from './components/date-card/date-card.component';
-import { MatCardModule, MatIconModule } from "@angular/material";
+import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatRadioModule } from "@angular/material";
+import { StartInterviewComponent } from "./components/start-interview/start-interview.component";
+import { QuestionsCarouselComponent } from './components/questions-carousel/questions-carousel.component';
 
 @NgModule({
     declarations: [ 
-        HomeComponent, DateCardComponent
+        HomeComponent, DateCardComponent, StartInterviewComponent, QuestionsCarouselComponent
     ],
     imports: [
         CommonModule,
@@ -21,6 +23,9 @@ import { MatCardModule, MatIconModule } from "@angular/material";
 
         MatCardModule,
         MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatRadioModule,
 
         SharedModule,
     ],

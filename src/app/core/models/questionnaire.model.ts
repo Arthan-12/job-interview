@@ -1,3 +1,4 @@
+import { Interview } from "./interview.model";
 import { Question } from "./question.model";
 
 export interface Questionnaire {
@@ -5,4 +6,5 @@ export interface Questionnaire {
     title?: string;
     category?: string;
     questions?: Question[];
+    vacancies?: Interview[];
 }
