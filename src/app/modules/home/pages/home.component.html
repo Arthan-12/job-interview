@@ -6,5 +6,6 @@
         <h1>Bem vindo, {{user}}!</h1>
         <button (click)="startInterview()">Iniciar uma entrevista!</button>
             <app-start-interview *ngIf="isInterviewStarted"></app-start-interview>
+            <app-candidate-score></app-candidate-score>
     </div>
 </div>

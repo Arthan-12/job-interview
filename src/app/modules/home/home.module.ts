@@ -9,10 +9,11 @@ import { DateCardComponent } from './components/date-card/date-card.component';
 import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatRadioModule } from "@angular/material";
 import { StartInterviewComponent } from "./components/start-interview/start-interview.component";
 import { QuestionsCarouselComponent } from './components/questions-carousel/questions-carousel.component';
+import { CandidateScoreComponent } from './components/candidate-score/candidate-score.component';
 
 @NgModule({
     declarations: [ 
-        HomeComponent, DateCardComponent, StartInterviewComponent, QuestionsCarouselComponent
+        HomeComponent, DateCardComponent, StartInterviewComponent, QuestionsCarouselComponent, CandidateScoreComponent
     ],
     imports: [
         CommonModule,

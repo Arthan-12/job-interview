@@ -31,5 +31,10 @@
                 <button>Iniciar questionário</button>
             </form>
     </div>
-    <app-questions-carousel *ngIf=[isInterviewStarted] [questions]="questions" [animationType]="animationType"></app-questions-carousel>
+    <app-questions-carousel *ngIf=[isInterviewStarted]
+                            [questions]="questions"
+                            [animationType]="animationType"
+                            (questionScore)="showScore($event)">
+    </app-questions-carousel>
+    {{totalScore}}
 </div>

@@ -48,6 +48,8 @@ export class StartInterviewComponent implements OnInit {
   interviewTitle = 'Entrevista de padawan';
   interviewForm: FormGroup;
   questionnaire: Questionnaire = {};
+  score: number[] = [];
+  totalScore: number;
 
   candidates$: Observable<Candidate[]>;
   interviews$: Observable<Interview[]>;
@@ -82,5 +84,12 @@ export class StartInterviewComponent implements OnInit {
     console.log(this.questionnaire.id);
   }
 
+  showScore(questionScore: number) {
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    this.score.push(questionScore);
+    console.log(this.score);
+    this.totalScore = this.score.reduce(reducer);
+    console.log(this.totalScore);
+  }
   
 }

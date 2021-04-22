@@ -5,11 +5,32 @@
           <h1>{{question.question}}</h1>
           <h2>{{question.answer}}</h2>
           <h3>dificuldade: {{question.difficulty}}</h3>
-          <mat-radio-group >
-            <mat-radio-button value="1">Option 1</mat-radio-button>
-            <mat-radio-button value="2">Option 2</mat-radio-button>
-            <mat-radio-button value="2">Option 3</mat-radio-button>
-            <mat-radio-button value="2">Option 4</mat-radio-button>
+          <h3>Avaliar resposta do candidato</h3>
+          <mat-radio-group class="answers-radio-options" (change)="radioChange($event)">
+            <mat-radio-button value="1">
+              Insuficiente
+              <mat-icon>
+                sentiment_very_dissatisfied
+              </mat-icon>
+            </mat-radio-button>
+            <mat-radio-button value="2">
+              Regular
+              <mat-icon>
+                sentiment_dissatisfied
+              </mat-icon>
+            </mat-radio-button>
+            <mat-radio-button value="3">
+              Boa
+              <mat-icon>
+                sentiment_satisfied
+              </mat-icon>
+            </mat-radio-button>
+            <mat-radio-button value="4">
+              Ótima
+              <mat-icon>
+                mood
+              </mat-icon>
+            </mat-radio-button>
           </mat-radio-group>
         </div>
         
@@ -18,6 +39,7 @@
     <!-- controls -->
     <button class="control prev" (click)="onPreviousClick()">Anterior
     </button>
+    <button (click)="scoreCount()">Enviar resposta</button>
     <button class="control next" (click)="onNextClick()">Próximo
     </button>
   </div>

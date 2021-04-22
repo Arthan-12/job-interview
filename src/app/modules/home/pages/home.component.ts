@@ -7,6 +7,7 @@ import { Component } from "@angular/core";
 export class HomeComponent {
     user ='Victor';
     isInterviewStarted = false;
+ 
 
     constructor(
     ) {}
@@ -14,4 +15,5 @@ export class HomeComponent {
     startInterview() {
         this.isInterviewStarted = true
     }
+
 }

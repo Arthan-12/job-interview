@@ -1,5 +1,6 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatRadioChange } from '@angular/material';
 import { Question } from 'src/app/core/models/question.model';
 import { AnimationType, fadeIn, fadeOut, flipIn, flipOut, jackIn, jackOut, scaleIn, scaleOut } from './carousel.animations';
 
@@ -48,19 +49,48 @@ export class QuestionsCarouselComponent {
   @Input() questions: Question[];
   @Input() animationType = AnimationType.Scale;
 
+  @Output() questionScore = new EventEmitter<number>();
+
   currentSlide = 0;
+  candidateScore: number[] = [];
+  answerBonus: number;
+ 
 
   constructor() {}
 
+  radioChange(event: MatRadioChange) {
+    this.answerBonus = event.value;
+    console.log(this.answerBonus);
+    return this.answerBonus
+  }
+
+  scoreCount(value: number) {
+    value = 100 * this.answerBonus;
+    console.log(value);
+    this.questionScore.emit(value);
+  }
+
+  totalScore() {
+    console.log(this.candidateScore)
+  }
+
   onPreviousClick() {
     const previous = this.currentSlide - 1;
-    this.currentSlide = previous < 0 ? this.questions.length - 1 : previous;
+    //this.currentSlide = previous < 0 ? this.questions.length - 1 : previous;
+    this.currentSlide = previous;
+    if(this.currentSlide == -1) {
+      this.currentSlide = 0
+    }
     console.log("previous clicked, new current slide is: ", this.currentSlide);
   }
 
   onNextClick() {
     const next = this.currentSlide + 1;
-    this.currentSlide = next === this.questions.length ? 0 : next;
+    //this.currentSlide = next === this.questions.length ? 0 : next;
+    this.currentSlide = next;
+    if(this.currentSlide == 10) {
+      this.currentSlide = 9
+    }
     console.log("next clicked, new current slide is: ", this.currentSlide);
   }
 
