@@ -108,6 +108,7 @@ export class DragAndDropComponent implements OnInit {
         duration: 2000,
         panelClass: ['snackbar-delete']
       });
+      this.refreshQuestionTable();
     })
   }
 
@@ -122,7 +123,7 @@ export class DragAndDropComponent implements OnInit {
       }
     })
     .afterClosed().subscribe(() => {
-      this.refreshQuestionTable()
+      this.refreshQuestionTable();
     });
   }
 

@@ -10,14 +10,14 @@ export class MenuComponent {
 
   constructor(private router: Router) {}
 
-  acoes: String[] = ['Entrevistas', 'Candidatos', 'Calendário']
+  acoes: String[] = ['Questionários', 'Candidatos', 'Calendário']
 
 
   goTo(acao: string) {
       if(acao == 'Candidatos') {
         this.router.navigate(['candidatos'])
-      } else if (acao == 'Entrevistas') {
-        this.router.navigate(['entrevistas'])
+      } else if (acao == 'Questionários') {
+        this.router.navigate(['questionarios'])
       }
   }
 }

@@ -4,7 +4,7 @@ import { InterviewComponent } from './pages/interview/interview.component';
 
 const routes: Routes = [
     { 
-        path: 'entrevistas',
+        path: 'questionarios',
         component: InterviewComponent,
     }
 ]

@@ -1,16 +1,18 @@
-.title {
-    font-size: 12pt;
+.interview-form {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
 }
 
-.dialog-options {
+.form-group {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 8px;
 }
 
-#close-dialog {
-    color: red;
+.form-group select {
+    width: 65%;
+    cursor: pointer;
 }
 
-#confirm-dialog{
-    color: green;
-}
+

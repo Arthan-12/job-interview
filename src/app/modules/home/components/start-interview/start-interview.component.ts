@@ -50,6 +50,7 @@ export class StartInterviewComponent implements OnInit {
   questionnaire: Questionnaire = {};
   score: number[] = [];
   totalScore: number;
+  isInterviewStarted: boolean = false;
 
   candidates$: Observable<Candidate[]>;
   interviews$: Observable<Interview[]>;
@@ -76,6 +77,7 @@ export class StartInterviewComponent implements OnInit {
   }
 
   submitForm() {
+    this.isInterviewStarted = true;
     this.questionnaire.id = this.interviewForm.get('questionnaireName').value
     this.questionService.getQuestionsByInterview(this.questionnaire.id).subscribe(res => {
       this.questions = res

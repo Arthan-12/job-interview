@@ -46,6 +46,7 @@ import { AnimationType, fadeIn, fadeOut, flipIn, flipOut, jackIn, jackOut, scale
 })
 export class QuestionsCarouselComponent {
 
+  //@Input() isInterviewStarted: boolean;
   @Input() questions: Question[];
   @Input() animationType = AnimationType.Scale;
 
@@ -54,17 +55,23 @@ export class QuestionsCarouselComponent {
   currentSlide = 0;
   candidateScore: number[] = [];
   answerBonus: number;
- 
+  isQuestionAnswered: boolean = false;
+  isQuestionSelected: boolean = false;
+  isInterviewStarted: boolean = false;
 
   constructor() {}
 
   radioChange(event: MatRadioChange) {
+    this.isQuestionSelected = true;
+    this.isInterviewStarted = true;
     this.answerBonus = event.value;
     console.log(this.answerBonus);
+    console.log(this.isInterviewStarted)
     return this.answerBonus
   }
 
   scoreCount(value: number) {
+    this.isQuestionAnswered = true;
     value = 100 * this.answerBonus;
     console.log(value);
     this.questionScore.emit(value);
@@ -75,6 +82,8 @@ export class QuestionsCarouselComponent {
   }
 
   onPreviousClick() {
+    this.isQuestionSelected = false;
+    this.isQuestionAnswered = false;
     const previous = this.currentSlide - 1;
     //this.currentSlide = previous < 0 ? this.questions.length - 1 : previous;
     this.currentSlide = previous;
@@ -85,11 +94,13 @@ export class QuestionsCarouselComponent {
   }
 
   onNextClick() {
+    this.isQuestionSelected = false;
+    this.isQuestionAnswered = false;
     const next = this.currentSlide + 1;
     //this.currentSlide = next === this.questions.length ? 0 : next;
     this.currentSlide = next;
-    if(this.currentSlide == 10) {
-      this.currentSlide = 9
+    if(this.currentSlide == this.questions.length) {
+      this.currentSlide = this.questions.length - 1;
     }
     console.log("next clicked, new current slide is: ", this.currentSlide);
   }

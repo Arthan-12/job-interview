@@ -37,9 +37,15 @@
     </ng-container>
   
     <!-- controls -->
-    <button class="control prev" (click)="onPreviousClick()">Anterior
-    </button>
-    <button (click)="scoreCount()">Enviar resposta</button>
-    <button class="control next" (click)="onNextClick()">Próximo
-    </button>
+      <div [class.carousel-buttons] ="isInterviewStarted == false">
+        <button class="control prev"
+                (click)="onPreviousClick()"
+                [disabled]="!isQuestionAnswered">Anterior
+        </button>
+        <button (click)="scoreCount()">Enviar resposta</button>
+        <button class="control next"
+                (click)="onNextClick()"
+                [disabled]="!isQuestionAnswered || !isQuestionSelected ">Próximo
+        </button>
+      </div>
   </div>

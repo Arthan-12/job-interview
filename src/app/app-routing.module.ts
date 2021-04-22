@@ -20,7 +20,7 @@ const routes: Routes = [
     component: CandidatesComponent,
   },
   {
-    path: 'entrevistas',
+    path: 'questionarios',
     component: InterviewComponent
   },
   { 

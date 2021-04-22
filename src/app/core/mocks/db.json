@@ -1,53 +1,32 @@
 {
   "candidates": [
     {
-      "name": "Alexandre Souza",
+      "name": "Obi-Wan Kenobi",
       "interview": "Scrum Master",
-      "score": "75",
-      "date": "2021-04-20",
+      "score": "",
+      "date": "2021-04-22",
       "id": 1
     },
     {
-      "name": "Victor Souza",
-      "interview": "Trainee Consultoria",
+      "name": "Luke Skywalker",
+      "interview": "Desenvolvedor React Pl",
+      "score": "",
+      "date": "2021-04-22",
+      "id": 2
+    },
+    {
+      "name": "Sheev Palpatine",
+      "interview": "Scrum Master",
       "score": "100",
-      "date": "2021-03-17",
+      "date": "2021-04-22",
       "id": 3
     },
     {
-      "name": "Kawabanga",
-      "interview": "Scrum Master",
-      "score": "80",
-      "date": "2021-03-31",
-      "id": 4
-    },
-    {
-      "name": "Kacchan",
+      "name": "R2-D2",
       "interview": "Desenvolvedor Java Jr",
-      "score": "80",
+      "score": "90",
       "date": "2021-04-22",
-      "id": 7
-    },
-    {
-      "name": "Zé",
-      "interview": "Desenvolvedor Java Jr",
-      "score": "55",
-      "date": "2021-04-28",
-      "id": 9
-    },
-    {
-      "name": "Giovanni Giorgio",
-      "interview": "Desenvolvedor Java Jr",
-      "score": "44",
-      "date": "2021-04-19",
-      "id": 11
-    },
-    {
-      "name": "Wilsan",
-      "interview": "Desenvolvedor React Pl",
-      "score": "55",
-      "date": "2021-04-19",
-      "id": 12
+      "id": 4
     }
   ],
   "interviews": [
@@ -118,9 +97,9 @@
     {
       "id": 3,
       "question": "pergunta FE 3",
+      "difficulty": "fácil",
       "questionnaireId": 1,
-      "answer": "resposta esperada FE 3",
-      "difficulty": "médio"
+      "answer": "resposta esperada FE 3"
     },
     {
       "id": 4,
@@ -336,13 +315,6 @@
       "difficulty": "",
       "questionnaireId": 3,
       "answer": ""
-    },
-    {
-      "id": 37,
-      "question": "pergunta FE 11",
-      "difficulty": "difícil",
-      "questionnaireId": 1,
-      "answer": "respostas esperada FE 11"
     }
   ]
 }

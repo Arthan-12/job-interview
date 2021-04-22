@@ -1,7 +1,7 @@
 <div >
     <div>
         <h1>{{interviewTitle}}</h1>
-            <form [formGroup]="interviewForm" (ngSubmit)="submitForm()" novalidate>
+            <form class="interview-form" [formGroup]="interviewForm" (ngSubmit)="submitForm()" novalidate>
                 <div class="form-group">
                     <label class="input-name">Candidato</label>
                     <select formControlName="candidateName" class="form-control">
@@ -22,13 +22,14 @@
 
                 <div class="form-group">
                     <label class="input-name">Questionário</label>
-                    <select formControlName="questionnaireName" class="form-control">
+                    <select formControlName="questionnaireName"
+                            class="form-control">
                     <option *ngFor="let questionnaire of questionnaires$ | async as questionnaires" [ngValue]="questionnaire.id">
                         {{questionnaire.title}}
                     </option>
                     </select>
                 </div>
-                <button>Iniciar questionário</button>
+                <button [disabled]="isInterviewStarted == true">Iniciar questionário</button>
             </form>
     </div>
     <app-questions-carousel *ngIf=[isInterviewStarted]
@@ -36,5 +37,5 @@
                             [animationType]="animationType"
                             (questionScore)="showScore($event)">
     </app-questions-carousel>
-    {{totalScore}}
+    <h3 *ngIf="isInterviewStarted==true">Pontuação parcial:{{totalScore}}</h3>
 </div>
