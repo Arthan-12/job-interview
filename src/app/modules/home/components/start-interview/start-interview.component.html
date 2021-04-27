@@ -4,8 +4,8 @@
             <form class="interview-form" [formGroup]="interviewForm" (ngSubmit)="submitForm()" novalidate>
                 <div class="form-group">
                     <label class="input-name">Candidato</label>
-                    <select formControlName="candidateName" class="form-control">
-                    <option *ngFor="let candidate of candidates$ | async as candidates" [ngValue]="candidate.name">
+                    <select formControlName="candidateName" class="form-control" (change)="getCandidate($event)">
+                    <option *ngFor="let candidate of candidates$ | async as candidates" [ngValue]="candidate.id" >
                         {{candidate.name}}
                     </option>
                     </select>
@@ -14,8 +14,8 @@
                 <div class="form-group">
                     <label class="input-name">Vaga</label>
                     <select formControlName="interviewVacancy" class="form-control">
-                    <option *ngFor="let interview of interviews$ | async as interviews" [ngValue]="interview.vacancy">
-                        {{interview.vacancy}}
+                    <option *ngFor="let candidate of candidates$ | async as candidates" [ngValue]="candidate.interview">
+                        {{candidate.interview}}
                     </option>
                     </select>
                 </div>
@@ -34,8 +34,18 @@
     </div>
     <app-questions-carousel *ngIf=[isInterviewStarted]
                             [questions]="questions"
-                            [animationType]="animationType"
-                            (questionScore)="showScore($event)">
+                            (questionScore)="showScore($event)"
+                            >
     </app-questions-carousel>
-    <h3 *ngIf="isInterviewStarted==true">Pontuação parcial:{{totalScore}}</h3>
+        <div class="score" *ngIf="isInterviewStarted==true">
+            <h3>Pontuação parcial:{{totalScore}}</h3>
+                <button id="btn-submit-score"
+                        class="score-btn"
+                        matTooltip="Salvar pontuação do candidato" matTooltipPosition="below" matTooltipClass="yellow-tooltip"
+                        mat-fab color="accent"
+                        (click)="submitCandidateScore()"
+                        >
+                    <mat-icon>sports_score</mat-icon>
+                </button>
+        </div>
 </div>

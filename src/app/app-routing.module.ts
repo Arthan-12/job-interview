@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MaintenanceComponent } from './errors/maintenance/maintenance.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
 import { InterviewComponent } from './modules/interviews/pages/interview/interview.component';
@@ -29,6 +30,13 @@ const routes: Routes = [
     data: {
         title: 'Not found'
     } 
+  },
+  {
+    path: 'calendário',
+    component: MaintenanceComponent,
+    data: {
+      title: 'Maintenance'
+    }
   },  
   { 
     path: '**', 

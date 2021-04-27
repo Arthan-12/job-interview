@@ -5,45 +5,67 @@
     <div class="content">
         <h1>Candidatos</h1>
         <div class="tools">
-            <button id="btn-add" class="crud-action-btn" mat-fab color="primary" (click)="openDialog()">
+            <button id="btn-add"
+                    class="crud-action-btn"
+                    matTooltip="Adicionar um candidato" matTooltipPosition="below" matTooltipClass="purple-tooltip"
+                    mat-fab color="primary"
+                    (click)="openDialog()">
                 <mat-icon>add</mat-icon>
             </button>
-            <button id="btn-delete" class="crud-action-btn" mat-fab color="warn" (click)="deleteCandidate()" [disabled]= "i== currentRow ? true: false">
+            <button id="btn-search"
+                    class="crud-action-btn"
+                    matTooltip="Procurar por candidato" matTooltipPosition="below" matTooltipClass="green-tooltip"
+                    mat-fab color="accent"
+                    (click)="showSearchCandidate()"
+                    >
+                <mat-icon>search</mat-icon>
+            </button>
+            <button id="btn-delete"
+                    class="crud-action-btn"
+                    matTooltip="Deletar candidato escolhido" matTooltipPosition="below" matTooltipClass="red-tooltip"
+                    mat-fab color="warn"
+                    (click)="deleteCandidate()"
+                    [disabled]= "i== currentRow ? true: false">
                 <mat-icon>delete</mat-icon>
             </button>
-            <button id="btn-update"class="crud-action-btn" mat-fab color="accent" (click)="updateCandidate()" [disabled]= "i== currentRow ? true: false">
+            <button id="btn-update"
+                    class="crud-action-btn"
+                    matTooltip="Editar candidato escolhido" matTooltipPosition="below" matTooltipClass="yellow-tooltip"
+                    mat-fab color="accent"
+                    (click)="updateCandidate()"
+                    [disabled]= "i== currentRow ? true: false">
                 <mat-icon>update</mat-icon>
             </button>
-        </div>
-        <div class="search-candidate">
-            <input type="search" placeholder="Pesquisar por candidato" [(ngModel)]="searchCandidate">
             
+        </div>
+        <div class="search-candidate" *ngIf="searchBtnClicked==true">
+            <input type="search" placeholder="Pesquisar por candidato" [(ngModel)]="searchCandidate">    
         </div>
         <table class="mat-elevation-z8">
             <thead>
                 <tr>
-                    <th>NOME
+                    <th class="table-header">NOME
                         <a (click)="orderByName()">
                             <mat-icon>
                                reorder
                             </mat-icon>
                         </a>
                     </th>
-                    <th>ENTREVISTA
+                    <th class="table-header">ENTREVISTA
                         <a (click)="orderByInterview()">
                             <mat-icon>
                                reorder
                             </mat-icon>
                         </a>
                     </th>
-                    <th>SCORE
+                    <th class="table-header">SCORE
                         <a (click)="orderByScore()">
                             <mat-icon>
                                reorder
                             </mat-icon>
                         </a>
                     </th>
-                    <th>DATA
+                    <th class="table-header">DATA
                         <a (click)="orderByDate()" matTooltip="Tenha paciência padawan, estamos trabalhando nisso" matTooltipPosition="below" matTooltipClass="red-tooltip">
                             <mat-icon class="under-construction">
                                reorder

@@ -17,16 +17,23 @@
     {
       "name": "Sheev Palpatine",
       "interview": "Scrum Master",
-      "score": "100",
+      "score": 100,
       "date": "2021-04-22",
       "id": 3
     },
     {
       "name": "R2-D2",
       "interview": "Desenvolvedor Java Jr",
-      "score": "90",
+      "score": "95",
       "date": "2021-04-22",
       "id": 4
+    },
+    {
+      "name": "BB-8",
+      "interview": "Desenvolvedor Java Jr",
+      "score": "92",
+      "date": "2021-04-29",
+      "id": 5
     }
   ],
   "interviews": [
@@ -305,7 +312,7 @@
     {
       "id": 35,
       "question": "pergunta AM 11",
-      "difficulty": "médio",
+      "difficulty": "difícil",
       "questionnaireId": 3,
       "answer": "resposta esperada AM 11"
     },
@@ -315,6 +322,13 @@
       "difficulty": "",
       "questionnaireId": 3,
       "answer": ""
+    },
+    {
+      "id": 37,
+      "question": "pergunta FE 11",
+      "difficulty": "médio",
+      "questionnaireId": 1,
+      "answer": "pergunta esperada FE 11"
     }
   ]
 }

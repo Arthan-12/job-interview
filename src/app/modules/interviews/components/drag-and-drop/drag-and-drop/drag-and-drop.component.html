@@ -7,25 +7,28 @@
         <mat-icon>description</mat-icon>
     </button>
     <button id="btn-add" class="crud-action-btn"
+            matTooltip="Adicionar uma questão" matTooltipPosition="below" matTooltipClass="purple-tooltip"
             mat-fab color="primary"
             (click)="openDialog()"
             [disabled]= "selectedOption == undefined ? true: false">
         <mat-icon>add</mat-icon>
     </button>
     <button id="btn-delete" class="crud-action-btn"
+            matTooltip="Deletar questão escolhida" matTooltipPosition="below" matTooltipClass="red-tooltip"
             mat-fab color="warn"
             (click)="deleteQuestion()"
             [disabled]= "i== currentRow ? true: false">
         <mat-icon>delete</mat-icon>
     </button>
     <button id="btn-update"class="crud-action-btn"
+            matTooltip="Editar questão escolhida" matTooltipPosition="below" matTooltipClass="yellow-tooltip"
             mat-fab color="accent" type="submit"
             (click)="editQuestion()"
             [disabled]= "i== currentRow ? true: false">
         <mat-icon>update</mat-icon>
     </button>
 </div>
-<table class="mat-elevation-z8">
+<table class="mat-elevation-z8"  *ngIf="(questions$ | async) as questions">
     <thead>
         <tr>
             <th>DESCRIÇÃO</th>
@@ -34,8 +37,9 @@
         </tr>
     </thead>
     <tbody class="tab-perguntas-content"
+           
             cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="questions">
-            <tr *ngFor="let question of questions$ | async as questions;
+            <tr *ngFor="let question of questions;
                         let i = index"
                         (click)="getQuestion(question, i)"
                         [class.current-row]= "i == currentRow"
@@ -46,14 +50,3 @@
             </tr>
     </tbody>
 </table>
-<!--<div cdkDropList class="question-list" (cdkDropListDropped)="drop($event)" [cdkDropListData]="questions">
-    <div class="example-box"   *ngFor="let question of questions$ | async as questions; let i = index"
-        (click)="getQuestion(i)"
-        [class.current-row]= "i == currentRow"
-        cdkDrag>
-        <input matInput value= {{question?.question}}>
-    </div>
-</div>-->
-
-
- 

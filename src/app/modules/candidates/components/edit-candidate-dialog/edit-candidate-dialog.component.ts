@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs';
+
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { Interview } from 'src/app/core/models/interview.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
@@ -17,12 +18,11 @@ export class EditCandidateDialogComponent implements OnInit {
 
   candidateForm: FormGroup;
   candidate: Candidate;
+  index: number;
 
   interviews$: Observable<Interview[]>;
   candidate$: Observable<Candidate>;
 
-  index: number
-  
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: any,

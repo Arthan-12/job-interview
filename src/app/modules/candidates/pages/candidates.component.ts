@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import * as moment from 'moment';
-import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { debounce, debounceTime, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, mergeMap, tap, toArray } from 'rxjs/operators';
+
 import { Candidate } from 'src/app/core/models/candidate.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -23,15 +23,15 @@ export class CandidatesComponent implements OnInit {
   candidateUpdateForm: FormGroup;
   candidates: Candidate[] = [];
   candidate: Candidate;
-  candidateModel: Candidate;
   index: number;
   currentRow: number;
+
   candidate$: Observable<Candidate>;
   candidates$: Observable<Candidate[]>;
 
-  //subscription: Subscription;
+  searchBtnClicked: boolean = false;
 
-  newCandidateList: Candidate[];
+  //subscription: Subscription;
 
   constructor(
       public fb: FormBuilder,
@@ -42,7 +42,6 @@ export class CandidatesComponent implements OnInit {
      
   ) { }
    
-
   ngOnInit(): void {
     this.candidates$ = this.candidateService.getAllCandidates();
     this.candidateUpdateForm = this.fb.group({
@@ -61,8 +60,8 @@ export class CandidatesComponent implements OnInit {
       })
       .afterClosed().subscribe((result) => {
         if(result == true) {
-        console.log(this.candidateModel.id);
-        this.candidateService.deleteCandidate(this.candidateModel.id).subscribe()
+        console.log(this.candidate.id);
+        this.candidateService.deleteCandidate(this.candidate.id).subscribe()
         this.snackBar.openFromComponent(SnackbarComponent, {
           data: 'Candidato deletado com sucesso!',
           duration: 2000,
@@ -76,14 +75,14 @@ export class CandidatesComponent implements OnInit {
   }
 
   updateCandidate(): void {
-    console.log(this.candidateModel.id)
+    console.log(this.candidate.id)
     this.dialog.open(EditCandidateDialogComponent, {data: {
       formTitle: ['Editar dados do candidato'],
-      id: this.candidateModel.id, 
-      name: this.candidateModel.name,
-      interview: this.candidateModel.interview,
-      score: this.candidateModel.score,
-      date: this.candidateModel.date
+      id: this.candidate.id, 
+      name: this.candidate.name,
+      interview: this.candidate.interview,
+      score: this.candidate.score,
+      date: this.candidate.date
       }
     })
     .afterClosed().subscribe(() => {
@@ -91,8 +90,6 @@ export class CandidatesComponent implements OnInit {
       this.currentRow = null;
     })
   }
-
-  
 
   openDialog() {
     this.dialog.open(EditCandidateDialogComponent, { data: {
@@ -116,9 +113,13 @@ export class CandidatesComponent implements OnInit {
     this.orderByName();
   }
 
+  showSearchCandidate() {
+    if(!this.searchBtnClicked) this.searchBtnClicked = true;
+    else if (this.searchBtnClicked) this.searchBtnClicked = false;
+  }
+
   orderByName() {
     this.candidates$ = this.candidateService.getAllCandidates().pipe(
-     
       mergeMap((candidates: Candidate[]) => candidates),
       map((candidate: Candidate) => ({
         id: candidate.id,
@@ -135,13 +136,11 @@ export class CandidatesComponent implements OnInit {
         console.log(output.map((candidate) => candidate.id))
         return this.candidates
       })
-    );
-    
+    ); 
   }
 
   orderByInterview() {
     this.candidates$ = this.candidateService.getAllCandidates().pipe(
-     
       mergeMap((candidates: Candidate[]) => candidates),
       map((candidate: Candidate) => ({
         id: candidate.id,
@@ -162,7 +161,6 @@ export class CandidatesComponent implements OnInit {
 
   orderByScore() {
     this.candidates$ = this.candidateService.getAllCandidates().pipe(
-     
       mergeMap((candidates: Candidate[]) => candidates),
       map((candidate: Candidate) => ({
         id: candidate.id,
@@ -190,8 +188,8 @@ export class CandidatesComponent implements OnInit {
 
   getCandidate(candidate: Candidate, i: number) {
     this.currentRow = i;
-    this.candidateModel = candidate;
-    console.log(this.candidateModel);
+    this.candidate = candidate;
+    console.log(this.candidate);
   }
 
 }

@@ -1,4 +1,3 @@
-
 export interface Interview {
     id?: number;
     category?: string;

@@ -15,7 +15,9 @@ export class EditQuestionDialogComponent implements OnInit {
 
   questionForm: FormGroup;
   question: Question;
+
   question$: Observable<Question>;
+  
   index: number;
   selectedDifficultyOption: string;
   difficultyOptions: string[] = [
@@ -64,7 +66,4 @@ export class EditQuestionDialogComponent implements OnInit {
       });
     }
   }
-
-  
-
 }

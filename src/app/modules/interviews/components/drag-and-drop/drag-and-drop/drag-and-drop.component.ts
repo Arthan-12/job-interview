@@ -1,10 +1,11 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Observable, pipe } from 'rxjs';
-import { filter, map, mergeMap, pluck, tap, toArray } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, mergeMap, tap, toArray } from 'rxjs/operators';
+
 import { Interview } from 'src/app/core/models/interview.model';
 import { Question } from 'src/app/core/models/question.model';
 import { Questionnaire } from 'src/app/core/models/questionnaire.model';
@@ -38,13 +39,25 @@ export class DragAndDropComponent implements OnInit {
   constructor(
     private questionService: QuestionService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
 
     public fb: FormBuilder,
     public httpClient: HttpClient,
-    private dialog: MatDialog,
   ) {
-    this.interview = {},
-    this.questionnaire = {}
+    this.interview = {
+      id: null,
+      category: null,
+      vacancy: null,
+      questions: null,
+      questionnaireId: null
+    },
+    this.questionnaire = {
+      id: null,
+      title: null,
+      category: null,
+      questions: null,
+      vacancies: null
+    }
    }
 
   ngOnInit() {
@@ -167,7 +180,6 @@ export class DragAndDropComponent implements OnInit {
         return this.questions
       })
     );
-    
   }
 
 }

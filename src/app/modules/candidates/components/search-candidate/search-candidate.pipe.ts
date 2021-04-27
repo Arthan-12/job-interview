@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { debounceTime } from "rxjs/operators";
-
 
 @Pipe({
     name: 'candidateFilter'
@@ -18,7 +16,6 @@ export class SearchCandidatePipe implements PipeTransform {
             (val.score.toLowerCase().includes(args)) ||
             (val.date.toLowerCase().includes(args));
             return searchValue
-        })
+        });
     }
-
 }

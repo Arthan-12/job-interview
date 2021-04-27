@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 
 @NgModule({
@@ -10,6 +11,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CommonModule,
     RouterModule
   ],
-  declarations: [NotFoundComponent],
+  declarations: [NotFoundComponent, MaintenanceComponent],
 })
 export class ErrorsModule { }

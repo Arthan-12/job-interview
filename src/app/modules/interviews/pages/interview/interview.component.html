@@ -4,7 +4,7 @@
     </div>
     <div class="content">
             <h1>Questionários</h1>
-            <mat-form-field>
+            <mat-form-field class="questionnaire-dropdown">
                 <mat-label>Selecione uma entrevista</mat-label>
                 <mat-select [(ngModel)]="selectedOption">
                   <mat-option *ngFor="let interview of interviews$ | async as interviews"

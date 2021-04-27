@@ -2,9 +2,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core"
 import { Observable } from "rxjs";
 import { mergeMap, map, toArray, tap } from "rxjs/operators";
-import { Interview } from "../models/interview.model";
+
 import { Question } from "../models/question.model";
-import { InterviewService } from "./interview.service";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +17,7 @@ export class QuestionService {
         })
     }
 
-    constructor(private http: HttpClient, private interviewService: InterviewService) {}
+    constructor(private http: HttpClient) {}
 
     getAllQuestions(): Observable<Question[]> {
         return this.http.get<Question[]>(this.API_URL + '/questions');

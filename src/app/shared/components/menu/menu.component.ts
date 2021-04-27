@@ -15,9 +15,11 @@ export class MenuComponent {
 
   goTo(acao: string) {
       if(acao == 'Candidatos') {
-        this.router.navigate(['candidatos'])
+        this.router.navigate(['candidatos']);
       } else if (acao == 'Questionários') {
-        this.router.navigate(['questionarios'])
+        this.router.navigate(['questionarios']);
+      } else if (acao == 'Calendário') {
+        this.router.navigate(['calendário']);
       }
   }
 }
