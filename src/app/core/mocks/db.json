@@ -3,21 +3,21 @@
     {
       "name": "Obi-Wan Kenobi",
       "interview": "Scrum Master",
-      "score": "",
+      "score": "90",
       "date": "2021-04-22",
       "id": 1
     },
     {
       "name": "Luke Skywalker",
       "interview": "Desenvolvedor React Pl",
-      "score": "",
+      "score": "75",
       "date": "2021-04-22",
       "id": 2
     },
     {
       "name": "Sheev Palpatine",
       "interview": "Scrum Master",
-      "score": 100,
+      "score": 700,
       "date": "2021-04-22",
       "id": 3
     },

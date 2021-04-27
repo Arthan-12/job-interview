@@ -13,7 +13,7 @@ export class SearchCandidatePipe implements PipeTransform {
         return value.filter((val) => {
             let searchValue = (val.name.toLowerCase().includes(args)) ||
             (val.interview.toLowerCase().includes(args)) ||
-            (val.score.toLowerCase().includes(args)) ||
+            (val.score.toString().toLowerCase().includes(args)) ||
             (val.date.toLowerCase().includes(args));
             return searchValue
         });
