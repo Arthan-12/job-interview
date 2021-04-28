@@ -4,6 +4,7 @@ import { MaintenanceComponent } from './errors/maintenance/maintenance.component
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
 import { InterviewComponent } from './modules/interviews/pages/interview/interview.component';
+import { SignInComponent } from './modules/sign-in/pages/sign-in/sign-in.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'questionarios',
     component: InterviewComponent
+  },
+  { 
+    path: 'sign-in',
+    component: SignInComponent,
   },
   { 
     path: 'not-found', 

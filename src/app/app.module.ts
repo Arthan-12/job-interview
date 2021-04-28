@@ -11,6 +11,7 @@ import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './modules/home/home.module';
 import { CandidatesModule } from './modules/candidates/candidates.module';
 import { InterviewsModule } from './modules/interviews/interviews.module';
+import { SignInModule } from './modules/sign-in/sign-in.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InterviewsModule } from './modules/interviews/interviews.module';
     ErrorsModule,
     HomeModule,
     CandidatesModule,
-    InterviewsModule
+    InterviewsModule,
+    SignInModule
   ],
   providers: [],
   bootstrap: [AppComponent]

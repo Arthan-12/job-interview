@@ -12,10 +12,11 @@ import { DateCardComponent } from './components/date-card/date-card.component';
 import { StartInterviewComponent } from "./components/start-interview/start-interview.component";
 import { QuestionsCarouselComponent } from './components/questions-carousel/questions-carousel.component';
 import { CandidateScoreComponent } from './components/candidate-score/candidate-score.component';
+import { SignInComponent } from "./pages/sign-in/sign-in.component";
 
 @NgModule({
     declarations: [ 
-        HomeComponent, DateCardComponent, StartInterviewComponent, QuestionsCarouselComponent, CandidateScoreComponent
+        HomeComponent, DateCardComponent, StartInterviewComponent, QuestionsCarouselComponent, CandidateScoreComponent, SignInComponent
     ],
     imports: [
         CommonModule,
