@@ -4,6 +4,7 @@ import { MaintenanceComponent } from './errors/maintenance/maintenance.component
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
 import { InterviewComponent } from './modules/interviews/pages/interview/interview.component';
+import { LoginComponent } from './modules/login/pages/login/login.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './modules/home/home.module#HomeModule'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   { 
     path: 'candidatos', 

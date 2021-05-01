@@ -16,4 +16,8 @@ export class HeaderComponent {
         this.router.navigate(['home']);
     }
 
+    logout() {
+        this.router.navigate(['login'])
+    }
+
 }
