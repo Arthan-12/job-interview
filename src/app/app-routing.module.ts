@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './core/auth/auth-guard';
 import { MaintenanceComponent } from './errors/maintenance/maintenance.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
@@ -23,10 +24,12 @@ const routes: Routes = [
   },
   { 
     path: 'candidatos', 
+    canActivate: [AuthGuard],
     component: CandidatesComponent,
   },
   {
     path: 'questionarios',
+    canActivate: [AuthGuard],
     component: InterviewComponent
   },
   { 
@@ -37,7 +40,8 @@ const routes: Routes = [
     } 
   },
   {
-    path: 'calendário',
+    path: 'calendario',
+    canActivate: [AuthGuard],
     component: MaintenanceComponent,
     data: {
       title: 'Maintenance'

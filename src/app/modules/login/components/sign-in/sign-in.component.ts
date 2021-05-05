@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/core/models/user.model';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,18 +16,25 @@ export class SignInComponent implements OnInit {
   constructor(
     //public data: any,
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.signInForm = this.fb.group({
-      email: '',
-      password: ''
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   login() {
     console.log(this.signInForm.value);
-    this.router.navigate(['home']);
+    const model: User = this.signInForm.value as User;
+    this.userService.userLogin(model);
+    this.userLogged();
+  }
+
+  userLogged() {
+    this.userService.userLogged();
   }
 }

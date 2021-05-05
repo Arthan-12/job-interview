@@ -19,7 +19,7 @@ export class MenuComponent {
       } else if (acao == 'Questionários') {
         this.router.navigate(['questionarios']);
       } else if (acao == 'Calendário') {
-        this.router.navigate(['calendário']);
+        this.router.navigate(['calendario']);
       }
   }
 }
