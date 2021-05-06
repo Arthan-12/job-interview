@@ -45,11 +45,21 @@ export class UserService {
         console.log(this.currentUser);
     }
 
-    userLogged() {
-        if(this.isLogged == true) {
+    userLogged(isUserLogged: boolean): boolean {
+        
+        if(isUserLogged) {
             console.log('usuário logado!', this.isLogged);
+            return this.isLogged = true
         } else {
             console.log('usuário deslogado', this.isLogged);
+            return this.isLogged = false
         }
+    }
+
+    canAuth() {
+        if(this.isLogged)
+        return true
+        else
+        return false
     }
 }

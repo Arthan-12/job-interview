@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, delay } from 'rxjs/operators';
 import { User } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -35,32 +35,35 @@ export class SignInComponent implements OnInit {
 
   login() {
     const model: User = this.signInForm.value as User;
-    this.users$ = this.userService.getAllUsers().pipe();
-    this.users$.pipe(
-            mergeMap((users: User[]) => users),
-            map((apiUser: User) => {
-                if(model.email === apiUser.email && model.password === apiUser.password) {
-                    this.isLogged = true;
-                    this.userService.isLogged = true;
-                    this.userService.currentUser = apiUser
-                    this.router.navigate(['home']);
-                } else {
-                    this.isLogged = false;
-                    this.userService.isLogged = false;
-                }
-            })
-        ).subscribe();
-    this.isUserLogged();
+    this.users$ = this.userService.getAllUsers();
+    this.userService.getAllUsers().subscribe(
+      (users: User[]) => {
+        
+        for (let user of users) {
+          if(model.email === user.email && model.password === user.password) {
+            this.isLogged = true;
+            this.userService.isLogged = true;
+            this.userService.currentUser = user
+            this.router.navigate(['home']);
+            return
+        } else {
+            this.isLogged = false;
+            this.userService.isLogged = false;
+        }
+        this.userAuth();
+        }
+      }
+    )
   }
 
-  isUserLogged() {
+
+  userAuth() {
     if(this.isLogged) {
       console.log('usuário autenticado!');
     } else {
       console.error('falha na autenticação!');
       this.loginErrorMessage = 'Login ou senha inválidos!';
     }
+    this.userService.userLogged(this.isLogged);
   }
-
-
 }

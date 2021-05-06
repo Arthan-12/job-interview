@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { delay } from "rxjs/operators";
 
 @Pipe({
     name: 'candidateFilter'
@@ -15,6 +16,7 @@ export class SearchCandidatePipe implements PipeTransform {
             (val.interview.toLowerCase().includes(args)) ||
             (val.score.toString().toLowerCase().includes(args)) ||
             (val.date.toLowerCase().includes(args));
+            delay(500);
             return searchValue
         });
     }
