@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 import { User } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -12,6 +14,10 @@ import { UserService } from 'src/app/core/services/user.service';
 export class SignInComponent implements OnInit {
 
   signInForm: FormGroup;
+  loginErrorMessage: string = '';
+  isLogged: boolean = false;
+
+  users$: Observable<User[]>;
 
   constructor(
     //public data: any,
@@ -28,13 +34,24 @@ export class SignInComponent implements OnInit {
   }
 
   login() {
-    console.log(this.signInForm.value);
     const model: User = this.signInForm.value as User;
-    this.userService.userLogin(model);
-    this.userLogged();
+    this.users$ = this.userService.getAllUsers().pipe();
+    this.users$.pipe(
+            mergeMap((users: User[]) => users),
+            map((apiUser: User) => {
+                if(model.email === apiUser.email && model.password === apiUser.password) {
+                    this.isLogged = true;
+                    this.userService.isLogged = true;
+                    console.log('usuário autenticado!');
+                    this.router.navigate(['home']);
+                } else {
+                    this.isLogged = false;
+                    this.userService.isLogged = false;
+                    console.error('falha na autenticação!');
+                    this.loginErrorMessage = 'Login ou senha inválidos!';
+                }
+            })
+        ).subscribe();
   }
 
-  userLogged() {
-    this.userService.userLogged();
-  }
 }

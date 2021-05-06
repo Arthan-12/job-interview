@@ -1,10 +1,10 @@
 
 <div class="container">
-    <div class="sign-in-form">
-        <p>sign-in works!</p>
-        <form [formGroup]="signInForm" >
+    <div class="sign-in-box">
+        <p>JOIN</p>
+        <form [formGroup]="signInForm" class="login-form">
             <div class="form-group">
-                <label class="input-name">Email</label>
+                <label class="input-email">Email</label>
                 <input type="email" formControlName="email" class="form-control" value="{{email}}">
                 <app-alert-message
                     *ngIf="signInForm.get('email').errors?.required && signInForm.get('email').touched"
@@ -12,7 +12,7 @@
                 </app-alert-message>
             </div>
             <div class="form-group">
-                <label class="input-name">Senha</label>
+                <label class="input-password">Senha</label>
                 <input type="password" formControlName="password" class="form-control" value="{{password}}">
                 <app-alert-message
                     *ngIf="signInForm.get('password').errors?.required && signInForm.get('password').touched"
@@ -21,6 +21,12 @@
             </div>
             <button (click)="login()">Entrar</button>
         </form>
+        <div class="login-alert" *ngIf="loginErrorMessage != '' ">
+            <img id="yoda" src="./../../../../../assets/img/yoda_svg.svg">
+            <app-alert-message
+                text="Invalid login or password. That is why you fail!">
+            </app-alert-message>
+        </div>
     </div>
 </div>
     

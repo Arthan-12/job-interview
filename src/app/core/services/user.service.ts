@@ -28,29 +28,16 @@ export class UserService {
         return this.http.get<User[]>(this.API_URL);
     }
 
+    getUserById(user: User): Observable<User> {
+        return this.http.get<User>(this.API_URL+ `/${user.id}`);
+    }
+
     createUserProfile(user: User): Observable<User> {
         return this.http.post<User>(this.API_URL, user, this.httpOptions);
     }
 
-    modifyUserProfile(user: User) {
+    modifyUserProfile(user: User): Observable<User> {
         return this.http.patch<User>(this.API_URL + `/${user.id}`, JSON.stringify(user), this.httpOptions);
-    }
-
-    userLogin(user: User) {
-        let users = this.getAllUsers();
-        users.pipe(
-            mergeMap((users: User[]) => users),
-            map((apiUser: User) => {
-                if(user.email === apiUser.email && user.password === user.password) {
-                    this.isLogged = true;
-                    console.log('usuário autenticado!');
-                    this.router.navigate(['home'])
-                } else {
-                    this.isLogged = false;
-                    console.log('falha na autenticação!');
-                }
-            })
-        ).subscribe();
     }
 
     userLogged() {
