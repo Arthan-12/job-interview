@@ -19,6 +19,7 @@ export class UserService {
         })
     }
     isLogged: boolean;
+    currentUser: User;
 
     constructor(
         private http: HttpClient,
@@ -38,6 +39,10 @@ export class UserService {
 
     modifyUserProfile(user: User): Observable<User> {
         return this.http.patch<User>(this.API_URL + `/${user.id}`, JSON.stringify(user), this.httpOptions);
+    }
+
+    getCurrentUser() {
+        console.log(this.currentUser);
     }
 
     userLogged() {

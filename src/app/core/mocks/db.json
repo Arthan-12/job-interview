@@ -6,6 +6,13 @@
       "password": "1234",
       "name": "Victor Souza",
       "profilePicture": null
+    },
+    {
+      "id": 2,
+      "email": "alexandre.souza@email.com",
+      "password": "1234",
+      "name": "Alexandre Souza",
+      "profilePicture": null
     }
   ],
   "candidates": [

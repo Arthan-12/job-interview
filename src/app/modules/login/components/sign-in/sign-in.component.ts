@@ -42,16 +42,25 @@ export class SignInComponent implements OnInit {
                 if(model.email === apiUser.email && model.password === apiUser.password) {
                     this.isLogged = true;
                     this.userService.isLogged = true;
-                    console.log('usuário autenticado!');
+                    this.userService.currentUser = apiUser
                     this.router.navigate(['home']);
                 } else {
                     this.isLogged = false;
                     this.userService.isLogged = false;
-                    console.error('falha na autenticação!');
-                    this.loginErrorMessage = 'Login ou senha inválidos!';
                 }
             })
         ).subscribe();
+    this.isUserLogged();
   }
+
+  isUserLogged() {
+    if(this.isLogged) {
+      console.log('usuário autenticado!');
+    } else {
+      console.error('falha na autenticação!');
+      this.loginErrorMessage = 'Login ou senha inválidos!';
+    }
+  }
+
 
 }
