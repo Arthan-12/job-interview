@@ -23,13 +23,14 @@
                 <div class="form-group">
                     <label class="input-name">Questionário</label>
                     <select formControlName="questionnaireName"
-                            class="form-control">
+                            class="form-control"
+                            (change)="enableStartInterviewButton()">
                     <option *ngFor="let questionnaire of questionnaires$ | async as questionnaires" [ngValue]="questionnaire.id">
                         {{questionnaire.title}}
                     </option>
                     </select>
                 </div>
-                <button [disabled]="isInterviewStarted == true">Iniciar questionário</button>
+                <button [disabled]="isInterviewStarted == true || disableButton == true">Iniciar questionário</button>
             </form>
     </div>
     <app-questions-carousel *ngIf=[isInterviewStarted]

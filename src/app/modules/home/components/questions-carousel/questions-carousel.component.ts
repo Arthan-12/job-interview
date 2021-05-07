@@ -19,6 +19,7 @@ export class QuestionsCarouselComponent {
   isQuestionAnswered: boolean = false;
   isQuestionSelected: boolean = false;
   isInterviewStarted: boolean = false;
+  disableButton: boolean = false;
 
   constructor() {}
 
@@ -47,6 +48,9 @@ export class QuestionsCarouselComponent {
     this.isQuestionAnswered = false;
     const previous = this.currentSlide - 1;
     this.currentSlide = previous;
+    if(this.currentSlide == 0) {
+      this.disableButton = true;
+    }
     if(this.currentSlide == -1) {
       this.currentSlide = 0
     }
@@ -59,6 +63,7 @@ export class QuestionsCarouselComponent {
     this.currentSlide = next;
     if(this.currentSlide == this.questions.length) {
       this.currentSlide = this.questions.length - 1;
+      this.disableButton = true;
     }
   }
 

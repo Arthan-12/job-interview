@@ -9,8 +9,8 @@
   
   .slide {
     border: solid cornflowerblue;
-    width: 500px;
-    height: 400px;
+    width: 18rem;
+    height: 28rem;
     padding-left: 16px;
   }
 
@@ -23,3 +23,8 @@
     display: none;
   }
   
+  .radio-option {
+    width: 9rem;
+    display: flex;
+    justify-content: space-between;
+  }

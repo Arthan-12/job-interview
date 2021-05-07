@@ -7,7 +7,7 @@
                 <label class="input-email">Email</label>
                 <input type="email" formControlName="email" class="form-control" value="{{email}}">
                 <app-alert-message
-                    *ngIf="signInForm.get('email').errors?.required && signInForm.get('email').touched"
+                    *ngIf="signInForm.get('email').errors?.required && submitted"
                     text="Campo obrigatório">
                 </app-alert-message>
             </div>
@@ -15,7 +15,7 @@
                 <label class="input-password">Senha</label>
                 <input type="password" formControlName="password" class="form-control" value="{{password}}">
                 <app-alert-message
-                    *ngIf="signInForm.get('password').errors?.required && signInForm.get('password').touched"
+                    *ngIf="signInForm.get('password').errors?.required && submitted"
                     text="Campo obrigatório">
                 </app-alert-message>
             </div>

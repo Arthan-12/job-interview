@@ -4,10 +4,16 @@
     justify-content: space-between;
 }
 
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
 .user-info {
     width: 15%;
     display: flex;
     justify-content: space-around;
+    margin-right: 2rem;
 }
 
 .title {

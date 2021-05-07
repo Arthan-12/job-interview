@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
-import { map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { delay, map, mergeMap, tap, toArray } from 'rxjs/operators';
 
 import { Interview } from 'src/app/core/models/interview.model';
 import { Question } from 'src/app/core/models/question.model';
@@ -22,7 +22,7 @@ import { EditQuestionDialogComponent } from '../../edit-question-dialog/edit-que
 export class DragAndDropComponent implements OnInit {
 
   @Input() selectedOption: string;
-  //questionsArray: string[];
+
   questionnaire: Questionnaire;
   interview: Interview;
   question: Question;
@@ -33,6 +33,7 @@ export class DragAndDropComponent implements OnInit {
   index: number;
   currentRow: number;
   questionIndex: number;
+  disableButton: boolean = false;
   
   questions: Question[] = [];
   
@@ -41,8 +42,8 @@ export class DragAndDropComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
 
-    public fb: FormBuilder,
-    public httpClient: HttpClient,
+    private fb: FormBuilder,
+    private httpClient: HttpClient,
   ) {
     this.interview = {
       id: null,
@@ -89,7 +90,7 @@ export class DragAndDropComponent implements OnInit {
       duration: 2000,
       panelClass: ['snackbar-success']
     });
-    this.observableToArray()
+    this.observableToArray();
   }
 
   getQuestion(question: Question, i: number) {

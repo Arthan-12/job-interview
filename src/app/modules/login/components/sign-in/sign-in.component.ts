@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   loginErrorMessage: string = '';
   isLogged: boolean = false;
+  submitted: boolean = false;
 
   users$: Observable<User[]>;
 
@@ -34,6 +35,7 @@ export class SignInComponent implements OnInit {
   }
 
   login() {
+    this.submitted = true;
     const model: User = this.signInForm.value as User;
     this.users$ = this.userService.getAllUsers();
     this.userService.getAllUsers().subscribe(

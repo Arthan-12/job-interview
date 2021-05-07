@@ -32,6 +32,7 @@ export class StartInterviewComponent implements OnInit {
   score: number[] = [];
   totalScore: number;
   isInterviewStarted: boolean = false;
+  disableButton: boolean = true;
 
   candidate$: Observable<Candidate>;
   candidates$: Observable<Candidate[]>;
@@ -80,9 +81,17 @@ export class StartInterviewComponent implements OnInit {
     });  
   }
 
+  enableStartInterviewButton() {
+    let candidate = this.interviewForm.get('candidateName').value;
+    let questionnaire = this.interviewForm.get('questionnaireName').value;
+    if(candidate != "" && questionnaire != "") {
+      this.disableButton = false;
+    }
+  }
+
   submitForm() {
     this.isInterviewStarted = true;
-    this.questionnaire.id = this.interviewForm.get('questionnaireName').value
+    this.questionnaire.id = this.interviewForm.get('questionnaireName').value;
     this.questionService.getQuestionsByInterview(this.questionnaire.id).subscribe(res => {
       this.questions = res
       console.log(res);
@@ -101,7 +110,7 @@ export class StartInterviewComponent implements OnInit {
 
   submitCandidateScore() {
     this.getScore();
-    console.log(this.candidate)
+    console.log(this.candidate);
     this.candidateService.editCandidate(this.candidate.id, this.candidate).subscribe();
   }
 

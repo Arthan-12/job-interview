@@ -7,30 +7,38 @@
           <h3>dificuldade: {{question.difficulty}}</h3>
           <h3>Avaliar resposta do candidato</h3>
           <mat-radio-group class="answers-radio-options" (change)="radioChange($event)">
-            <mat-radio-button value="1">
-              Insuficiente
+            <div class="radio-option">
+              <mat-radio-button value="1">
+                Insuficiente
+              </mat-radio-button>
               <mat-icon>
                 sentiment_very_dissatisfied
               </mat-icon>
-            </mat-radio-button>
-            <mat-radio-button value="2">
-              Regular
+            </div>
+            <div class="radio-option">
+              <mat-radio-button value="2">
+                Regular
+              </mat-radio-button>
               <mat-icon>
                 sentiment_dissatisfied
               </mat-icon>
-            </mat-radio-button>
-            <mat-radio-button value="3">
-              Boa
+            </div>
+            <div class="radio-option">
+              <mat-radio-button value="3">
+                Boa
+              </mat-radio-button>
               <mat-icon>
                 sentiment_satisfied
               </mat-icon>
-            </mat-radio-button>
-            <mat-radio-button value="4">
-              Ótima
+            </div>
+            <div class="radio-option">
+              <mat-radio-button value="4">
+                Ótima
+              </mat-radio-button>
               <mat-icon>
                 mood
               </mat-icon>
-            </mat-radio-button>
+            </div>
           </mat-radio-group>
         </div>
         
@@ -38,14 +46,14 @@
   
     <!-- controls -->
       <div [class.carousel-buttons] ="isInterviewStarted == false">
-        <button class="control prev"
+        <button class="control-prev"
                 (click)="onPreviousClick()"
-                [disabled]="!isQuestionAnswered">Anterior
+                [disabled]="!isQuestionAnswered || disableButton">Anterior
         </button>
         <button (click)="scoreCount()">Enviar resposta</button>
-        <button class="control next"
+        <button class="control-next"
                 (click)="onNextClick()"
-                [disabled]="!isQuestionAnswered || !isQuestionSelected ">Próximo
+                [disabled]="!isQuestionAnswered || !isQuestionSelected || disableButton">Próximo
         </button>
       </div>
   </div>
