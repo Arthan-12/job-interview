@@ -1,7 +1,7 @@
 <div class="container">
     <div class="sign-up-box">
         <p>JOIN US</p>
-        <form [formGroup]="signUpForm">
+        <form [formGroup]="signUpForm" class="login-form">
             <div class="form-group">
                 <label>
                     Nome
@@ -9,7 +9,7 @@
                 <input type="text" formControlName="name">
                 <div *ngIf="submitted || signUpForm.get('name').touched">
                     <app-alert-message *ngIf="signUpForm.get('name').errors?.required"
-                                        text="Name is required">
+                                        text="Campo obrigatório">
                     </app-alert-message>
                 </div>
             </div>
@@ -18,12 +18,12 @@
                     Email
                 </label>
                 <input type="email" formControlName="email">
-                <div *ngIf="signUpForm.get('email').touched">
+                <div *ngIf="submitted || signUpForm.get('email').touched ">
                     <app-alert-message *ngIf="signUpForm.get('email').errors?.required"
-                                        text="Email is required">
+                                        text="Campo obrigatório">
                     </app-alert-message>
                     <app-alert-message *ngIf="signUpForm.get('email').errors?.email && submitted"
-                                        text="Email must be a valid email address">
+                                        text="Email inválido">
                     </app-alert-message>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <input type="password" formControlName="password">
                 <div *ngIf="submitted || signUpForm.get('password').touched">
                     <app-alert-message *ngIf="signUpForm.get('name').errors?.required"
-                                        text="Password is required">
+                                        text="Campo obrigatório">
                     </app-alert-message>
                 </div>
             </div>
@@ -44,11 +44,11 @@
                 </label>
                 <input type="password" formControlName="confirmPassword"><div *ngIf="submitted || signUpForm.get('confirmPassword').touched">
                 <app-alert-message *ngIf="signUpForm.get('confirmPassword').errors?.required"
-                                    text="Confirm Password is required">
+                                    text="Campo obrigatório">
                 </app-alert-message>
             </div>
             </div>
-            <button (click)="createUser()">Cadastrar</button>
+            <button class="login-page-buttons" (click)="createUser()">Cadastrar</button>
         </form>
     </div>
 </div>

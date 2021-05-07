@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EmailValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { User } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,12 +12,15 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class SignUpComponent implements OnInit {
 
+  @Output() isUserCreated = new EventEmitter<boolean>();
+
   signUpForm: FormGroup;
   submitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -40,16 +45,25 @@ export class SignUpComponent implements OnInit {
       password: this.signUpForm.get('password').value,
       profilePicure: null
     }
-    console.log(newUser);
     this.userService.getAllUsers().subscribe(
       (users: User[]) => {
         for (let user of users) {
           if(newUser.email === user.email) {
             console.log('Email já cadastrado!');
+            this.snackBar.openFromComponent(SnackbarComponent, {
+              data: 'Essa conta de email já existe. Seus truques Jedi não funcionam',
+              duration: 4000,
+              panelClass: ['snackbar-delete']
+            });
             return
         } else {
-          console.log('Conta disponível!');
-          this.userService.createUserProfile(newUser).subscribe()
+          this.userService.createUserProfile(newUser).subscribe();
+          this.isUserCreated.emit();
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            data: 'Usuário criado com sucesso!',
+            duration: 4000,
+            panelClass: ['snackbar-create']
+          });
           return
           }
         }

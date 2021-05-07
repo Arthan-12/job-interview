@@ -8,19 +8,19 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   signUpClicked: boolean = false;
+  //isUserCreated: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  goToSignUp() {
-    if(!this.signUpClicked) {
+  goToSignUp(isUserCreated) {
+    if(!this.signUpClicked || isUserCreated) {
       this.signUpClicked = true;
-    } else if(this.signUpClicked) {
+    } else if(this.signUpClicked ) {
       this.signUpClicked = false
     }
-      
   }
 
 }

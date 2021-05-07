@@ -25,12 +25,12 @@ const routes: Routes = [
   },
   { 
     path: 'candidatos', 
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: CandidatesComponent,
   },
   {
     path: 'questionarios',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: InterviewComponent
   },
   { 

@@ -20,6 +20,13 @@
       "password": "darthvader",
       "id": 3,
       "profilePicture": null
+    },
+    {
+      "name": "Obi -Wan Kenobi",
+      "email": "obi.kenobi@hellothere.com",
+      "password": "hellothere",
+      "profilePicure": null,
+      "id": 4
     }
   ],
   "candidates": [
@@ -38,7 +45,7 @@
       "id": 2
     },
     {
-      "name": "Sheev Fidamãe",
+      "name": "Sheev Palpatine",
       "interview": "Scrum Master",
       "score": 600,
       "date": "2021-04-22",

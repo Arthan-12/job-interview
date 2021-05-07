@@ -48,3 +48,9 @@ body {
 .under-construction {
   cursor: not-allowed;
 }
+
+.login-page-buttons:hover {
+  background-color:hsl(262, 52%, 47%);
+  color: white;
+  cursor: pointer;
+}

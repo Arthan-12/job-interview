@@ -7,4 +7,4 @@
     </p>
     <img id="empire-sigil" class="sign-up-icons" src="'./.././../../../../../assets/img/empire_sigil.svg"> 
 </div>
-<app-sign-up *ngIf="signUpClicked"></app-sign-up>
+<app-sign-up *ngIf="signUpClicked" (isUserCreated)="goToSignUp($event)" ></app-sign-up>
