@@ -5,6 +5,7 @@ import { MaintenanceComponent } from './errors/maintenance/maintenance.component
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
 import { InterviewComponent } from './modules/interviews/pages/interview/interview.component';
+import { SignUpComponent } from './modules/login/components/sign-up/sign-up.component';
 import { LoginComponent } from './modules/login/pages/login/login.component';
 
 
@@ -12,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home'
+    redirectTo: 'home',
   },
   {
     path: 'home',
@@ -20,16 +21,16 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   { 
     path: 'candidatos', 
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: CandidatesComponent,
   },
   {
     path: 'questionarios',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: InterviewComponent
   },
   { 
@@ -55,7 +56,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ 
-      RouterModule.forRoot(routes, { useHash: true } ) 
+      RouterModule.forRoot(routes ) 
   ],
   exports: [ RouterModule ]
 })

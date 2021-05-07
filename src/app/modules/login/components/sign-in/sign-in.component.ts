@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
 
   constructor(
     //public data: any,
-    public fb: FormBuilder,
+    private fb: FormBuilder,
     private router: Router,
     private userService: UserService
   ) { }
@@ -49,9 +49,9 @@ export class SignInComponent implements OnInit {
         } else {
             this.isLogged = false;
             this.userService.isLogged = false;
+          }
         }
         this.userAuth();
-        }
       }
     )
   }

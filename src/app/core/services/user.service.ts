@@ -34,7 +34,7 @@ export class UserService {
     }
 
     createUserProfile(user: User): Observable<User> {
-        return this.http.post<User>(this.API_URL, user, this.httpOptions);
+        return this.http.post<User>(this.API_URL, JSON.stringify(user), this.httpOptions);
     }
 
     modifyUserProfile(user: User): Observable<User> {

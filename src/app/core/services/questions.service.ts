@@ -35,7 +35,6 @@ export class QuestionService {
                 question: question.question,
                 answer: question.answer,
                 difficulty: question.difficulty
-                //questionnaireId: question.questionnaireId
             })),
             toArray(),
             tap((output) => console.log(output))

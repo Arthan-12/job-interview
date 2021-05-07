@@ -6,9 +6,10 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { LoginComponent } from './pages/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
-    declarations: [LoginComponent, SignInComponent],
+    declarations: [LoginComponent, SignInComponent, SignUpComponent],
     imports: [
        CommonModule,
        ReactiveFormsModule,

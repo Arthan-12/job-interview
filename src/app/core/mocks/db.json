@@ -13,6 +13,13 @@
       "password": "1234",
       "name": "Alexandre Souza",
       "profilePicture": null
+    },
+    {
+      "name": "Anakin Skywalker",
+      "email": "anakin.skywalker@starwars.com",
+      "password": "darthvader",
+      "id": 3,
+      "profilePicture": null
     }
   ],
   "candidates": [

@@ -1,2 +1,10 @@
 
-<app-sign-in></app-sign-in>
+<app-sign-in *ngIf="!signUpClicked"></app-sign-in>
+<div class="sign-up" *ngIf="!signUpClicked">
+    <img id="rebel-sigil" class="sign-up-icons" src="'./.././../../../../../assets/img/rebel_sigil.svg">
+    <p class="sign-up-text">Não possui cadastro?
+        <a class="link" (click)="goToSignUp()">JOIN US</a>
+    </p>
+    <img id="empire-sigil" class="sign-up-icons" src="'./.././../../../../../assets/img/empire_sigil.svg"> 
+</div>
+<app-sign-up *ngIf="signUpClicked"></app-sign-up>

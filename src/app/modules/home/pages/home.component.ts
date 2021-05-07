@@ -1,20 +1,23 @@
 import { Component, OnInit } from "@angular/core";
 
-import { User } from "src/app/core/models/user.model";
 import { UserService } from "src/app/core/services/user.service";
 
 @Component({
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
-    user: string = this.userService.currentUser.name
+    user: string; 
     isInterviewStarted = false;
  
 
     constructor( private userService: UserService
     ) {}
+
+    ngOnInit(): void {
+            this.user = this.userService.currentUser.name;
+    }
 
     startInterview() {
         this.isInterviewStarted = true

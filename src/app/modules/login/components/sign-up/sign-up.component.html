@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="sign-up-box">
+        <p>JOIN US</p>
+        <form [formGroup]="signUpForm">
+            <div class="form-group">
+                <label>
+                    Nome
+                </label>
+                <input type="text" formControlName="name">
+                <div *ngIf="submitted || signUpForm.get('name').touched">
+                    <app-alert-message *ngIf="signUpForm.get('name').errors?.required"
+                                        text="Name is required">
+                    </app-alert-message>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Email
+                </label>
+                <input type="email" formControlName="email">
+                <div *ngIf="signUpForm.get('email').touched">
+                    <app-alert-message *ngIf="signUpForm.get('email').errors?.required"
+                                        text="Email is required">
+                    </app-alert-message>
+                    <app-alert-message *ngIf="signUpForm.get('email').errors?.email && submitted"
+                                        text="Email must be a valid email address">
+                    </app-alert-message>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Senha
+                </label>
+                <input type="password" formControlName="password">
+                <div *ngIf="submitted || signUpForm.get('password').touched">
+                    <app-alert-message *ngIf="signUpForm.get('name').errors?.required"
+                                        text="Password is required">
+                    </app-alert-message>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Confirmação de senha
+                </label>
+                <input type="password" formControlName="confirmPassword"><div *ngIf="submitted || signUpForm.get('confirmPassword').touched">
+                <app-alert-message *ngIf="signUpForm.get('confirmPassword').errors?.required"
+                                    text="Confirm Password is required">
+                </app-alert-message>
+            </div>
+            </div>
+            <button (click)="createUser()">Cadastrar</button>
+        </form>
+    </div>
+</div>
