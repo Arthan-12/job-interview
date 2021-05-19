@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, mergeMap, tap, toArray } from 'rxjs/operators';
 
@@ -11,6 +11,7 @@ import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.c
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { EditCandidateDialogComponent } from '../components/edit-candidate-dialog/edit-candidate-dialog.component';
 
+
 @Component({
   selector: 'app-candidates',
   templateUrl: './candidates.component.html',
@@ -19,6 +20,9 @@ import { EditCandidateDialogComponent } from '../components/edit-candidate-dialo
 export class CandidatesComponent implements OnInit {
 
   @Input() searchCandidate: string;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
 
   candidateUpdateForm: FormGroup;
   candidates: Candidate[] = [];
@@ -31,6 +35,10 @@ export class CandidatesComponent implements OnInit {
 
   searchBtnClicked: boolean = false;
 
+
+  displayedColumns: string[] = ['id', 'name', 'interview', 'score', 'date', 'actions'];
+  dataSource: MatTableDataSource<Candidate>;
+ 
   //subscription: Subscription;
 
   constructor(
@@ -38,30 +46,37 @@ export class CandidatesComponent implements OnInit {
       public httpClient: HttpClient,
       private dialog: MatDialog,
       private candidateService: CandidateService,
-      private snackBar: MatSnackBar
+      private snackBar: MatSnackBar,
+      private changeDetectorRefs: ChangeDetectorRef
      
   ) { }
    
-  ngOnInit(): void {
+  ngOnInit() {
     this.candidates$ = this.candidateService.getAllCandidates();
+    this.candidateService.getAllCandidates().subscribe(res => {
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource.data)
+    });
     this.candidateUpdateForm = this.fb.group({
       name: [''],
       interview: [''],
       score: [''],
       date: [''],    
     });
-    this.orderByName();
+    this.refreshCandidateTable();
   }
 
-  deleteCandidate() {
+  deleteCandidate(id: number) {
       this.dialog.open(ConfirmDialogComponent, {data: {
         actionTitle: 'Confirma exclusão de candidato?'
         }
       })
       .afterClosed().subscribe((result) => {
         if(result == true) {
-        console.log(this.candidate.id);
-        this.candidateService.deleteCandidate(this.candidate.id).subscribe()
+        console.log(id);
+        this.candidateService.deleteCandidate(id).subscribe()
         this.snackBar.openFromComponent(SnackbarComponent, {
           data: 'Candidato deletado com sucesso!',
           duration: 2000,
@@ -74,15 +89,15 @@ export class CandidatesComponent implements OnInit {
     )  
   }
 
-  updateCandidate(): void {
-    console.log(this.candidate.id)
+  updateCandidate(id: number, name: string, interview: string, score: number, date: string ): void {
+    console.log(id)
     this.dialog.open(EditCandidateDialogComponent, {data: {
       formTitle: ['Editar dados do candidato'],
-      id: this.candidate.id, 
-      name: this.candidate.name,
-      interview: this.candidate.interview,
-      score: this.candidate.score,
-      date: this.candidate.date
+      id: id,
+      name: name,
+      interview: interview,
+      score: score,
+      date: date
       }
     })
     .afterClosed().subscribe(() => {
@@ -108,9 +123,10 @@ export class CandidatesComponent implements OnInit {
 
   refreshCandidateTable() {
     this.candidateService.getAllCandidates().subscribe((data: Candidate[]) => 
-    this.candidates = data);
+    this.dataSource.data = data);
     this.candidates$ = this.candidateService.getAllCandidates();
-    this.orderByName();
+    this.changeDetectorRefs.detectChanges();
+    console.log(this.dataSource)
   }
 
   showSearchCandidate() {
@@ -118,78 +134,22 @@ export class CandidatesComponent implements OnInit {
     else if (this.searchBtnClicked) this.searchBtnClicked = false;
   }
 
-  orderByName() {
-    this.candidates$ = this.candidateService.getAllCandidates().pipe(
-      mergeMap((candidates: Candidate[]) => candidates),
-      map((candidate: Candidate) => ({
-        id: candidate.id,
-        name: candidate.name,
-        interview: candidate.interview,
-        score: candidate.score,
-        date: candidate.date
-      })),
-      toArray(),
-      tap(output => {
-        output.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
-        );
-        this.candidates = output
-        console.log(output.map((candidate) => candidate.id))
-        return this.candidates
-      })
-    ); 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  orderByInterview() {
-    this.candidates$ = this.candidateService.getAllCandidates().pipe(
-      mergeMap((candidates: Candidate[]) => candidates),
-      map((candidate: Candidate) => ({
-        id: candidate.id,
-        name: candidate.name,
-        interview: candidate.interview,
-        score: candidate.score,
-        date: candidate.date
-      })),
-      toArray(),
-      tap(output => {
-        output.sort((a, b) => (a.interview.toLowerCase() < b.interview.toLowerCase() ? -1 : 1)
-        );
-        this.candidates = output
-        return this.candidates
-      })
-    );
+  getCandidate(i: number, name: string, interview: string, score: number, date: string) {
+    //this.currentRow = i;
+    //this.candidate.name = name;
+    console.log(i, name, interview, score, date);
   }
 
-  orderByScore() {
-    this.candidates$ = this.candidateService.getAllCandidates().pipe(
-      mergeMap((candidates: Candidate[]) => candidates),
-      map((candidate: Candidate) => ({
-        id: candidate.id,
-        name: candidate.name,
-        interview: candidate.interview,
-        score: candidate.score,
-        date: candidate.date
-      })),
-      toArray(),
-      tap(output => {
-        output.sort((a, b) => (b.score - a.score)
-        );
-        this.candidates = output
-        return this.candidates
-      })
-    );
-  }
-
-  trackByFunction(i: number, candidate: Candidate) {
-    this.currentRow = i;
-    candidate ? candidate.id : null;
-    this.candidate = candidate;
-    return this.candidate
-  }
-
-  getCandidate(candidate: Candidate, i: number) {
-    this.currentRow = i;
-    this.candidate = candidate;
-    console.log(this.candidate);
+  getAllCandidates() {
+    console.log(this.dataSource.data);
+    this.candidateService.getAllCandidates().subscribe(res =>
+      console.log(res)
+      )
   }
 
 }

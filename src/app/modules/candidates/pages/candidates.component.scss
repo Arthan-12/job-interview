@@ -31,6 +31,20 @@
     justify-content: space-between;   
 }
 
+table {
+    width: 100%;
+}
+  
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.paginator {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
 #btn-add {
     font-size: 24px;
 }
