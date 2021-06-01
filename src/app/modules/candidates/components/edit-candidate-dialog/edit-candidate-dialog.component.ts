@@ -36,7 +36,6 @@ export class EditCandidateDialogComponent implements OnInit {
     this.candidateForm = this.fb.group({
     name: this.data.name,
     interview: this.data.interview,
-    score: this.data.score,
     date: this.data.date,    
   })
 }

@@ -62,7 +62,6 @@ export class CandidatesComponent implements OnInit {
     this.candidateUpdateForm = this.fb.group({
       name: [''],
       interview: [''],
-      score: [''],
       date: [''],    
     });
     this.refreshCandidateTable();
@@ -96,7 +95,6 @@ export class CandidatesComponent implements OnInit {
       id: id,
       name: name,
       interview: interview,
-      score: score,
       date: date
       }
     })
@@ -111,7 +109,6 @@ export class CandidatesComponent implements OnInit {
       formTitle: ['Inscreva um candidato'],
       name: [''],
       interview: [''],
-      score: [''],
       date: ['']
       },
     })
@@ -139,10 +136,10 @@ export class CandidatesComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getCandidate(i: number, name: string, interview: string, score: number, date: string) {
+  getCandidate(i: number, name: string, interview: string, date: string) {
     //this.currentRow = i;
     //this.candidate.name = name;
-    console.log(i, name, interview, score, date);
+    console.log(i, name, interview, date);
   }
 
   getAllCandidates() {

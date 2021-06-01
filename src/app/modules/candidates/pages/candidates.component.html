@@ -86,7 +86,7 @@
                             *matHeaderCellDef
                             ></th>
                         <td mat-cell *matCellDef="let candidate; let i = index;">
-                            <button (click)="updateCandidate(candidate.id)">
+                            <button (click)="updateCandidate(candidate.id, candidate.name, candidate.interview, candidate.date)">
                                 <mat-icon>edit</mat-icon>
                             </button>
                             <button (click)="deleteCandidate(candidate.id, candidate.name, candidate.interview, candidate.score, candidate.date)">
