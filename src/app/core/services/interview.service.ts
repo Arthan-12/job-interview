@@ -10,7 +10,7 @@ import { Interview } from "../models/interview.model";
 })
 export class InterviewService {
 
-    private readonly API_URL = 'http://localhost:3000/interviews'
+    readonly API_URL = 'http://localhost:3000/interviews'
     httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'

@@ -1,32 +1,44 @@
-import { TestBed } from "@angular/core/testing";
+import { getTestBed, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { of } from "rxjs";
 import { Interview } from "../models/interview.model";
 import { InterviewService } from "./interview.service";
 
+
 describe(InterviewService.name, () => {
     let interviewService: InterviewService = null;
-    let httpClientSpy: { get: jasmine.Spy };
+    let httpClientMock: HttpTestingController;
     let injector: TestBed;
 
     beforeEach(() => {
-        httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-        interviewService = new InterviewService(httpClientSpy as any);
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [InterviewService]
+        });
+        injector = getTestBed();
+        interviewService = injector.get(InterviewService);
+        httpClientMock = injector.get(HttpTestingController);
     });
 
+    afterEach(() => {
+        httpClientMock.verify();
+    })
+
     it(`#${InterviewService.prototype.getAllInterviews.name}
-    should return all interviews when called`, (done: DoneFn) => {
+    should return all interviews when called`, () => {
         const expectedInterviews: Interview[] = 
         [{id: 1, category: 'Front End', vacancy: 'Desenvolvedor Angular Pl'}, { id: 2, category: 'Back End', vacancy: 'Desenvolvedor Java Jr' }];
-
-        httpClientSpy.get.and.returnValue(of(expectedInterviews));
 
         interviewService.getAllInterviews().subscribe(
             interviews => {
                 expect(interviews).toEqual(expectedInterviews, 'expected interviews');
-                done();
             }
-        )
-    })
-})
+        );
+
+        const req = httpClientMock.expectOne(`${interviewService.API_URL}`);
+        expect(req.request.method).toBe('GET');
+        req.flush(expectedInterviews);
+    });
+});
 
 
