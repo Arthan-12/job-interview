@@ -10,7 +10,7 @@ import { Candidate } from "src/app/core/models/candidate.model";
 })
 export class CandidateService {
 
-    private readonly API_URL = 'http://localhost:3000/candidates'
+    public readonly API_URL = 'http://localhost:3000/candidates'
     private httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json; charset=utf-8'
@@ -42,10 +42,6 @@ export class CandidateService {
 
     editCandidateScore(id: number, candidateScore: number): Observable<Candidate> {
         return this.http.put<Candidate>(this.API_URL + '/' + id, JSON.stringify(candidateScore), this.httpOptions);
-    }
-
-    editAllCandidates(ids: number[]): Observable<Candidate[]> {
-        return this.http.put<Candidate[]>(this.API_URL + '/' + ids, this.httpOptions);
     }
 
     deleteCandidate(id: number): Observable<Candidate> {

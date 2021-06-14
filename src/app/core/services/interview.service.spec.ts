@@ -1,10 +1,7 @@
 import { getTestBed, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { of } from "rxjs";
 import { Interview } from "../models/interview.model";
 import { InterviewService } from "./interview.service";
-import { HttpResponse } from "@angular/common/http";
-import { url } from "inspector";
 
 
 describe(InterviewService.name, () => {
@@ -42,6 +39,22 @@ describe(InterviewService.name, () => {
         req.flush(expectedInterviews);
     });
 
+    it(`#${InterviewService.prototype.findById.name}
+    should return a specific interviview by it's ID when called`, () => {
+       // const expectedInterviewId: number = 1;
+        const expectedInterview: Interview = {id: 1, category: 'Front End', vacancy: 'Desenvolvedor Angular Pl'};
+
+        interviewService.findById(expectedInterview.id).subscribe(
+            interview => {
+                expect(interview).toEqual(expectedInterview)
+            }
+        );
+
+        const req = httpClientMock.expectOne(req => req.method === 'GET' && req.url === `${interviewService.API_URL}/${expectedInterview.id}`);
+        req.flush(expectedInterview);
+        
+    });
+
     it(`#${InterviewService.prototype.editInterview.name}
     should update an interview and return it when called`, () => {
         const expectedInterviewId: number = 1;
@@ -58,19 +71,17 @@ describe(InterviewService.name, () => {
         req.flush(expectedUpdatedInterview);
     });
 
-    it(`#${InterviewService.prototype.findById.name}
-    should return a specific interviview by it's ID when called`, () => {
-        const expectedInterviewId: number = 1;
-        const expectedInterview: Interview = {id: 1, category: 'Front End', vacancy: 'Desenvolvedor Angular Pl'};
+    it(`#${InterviewService.prototype.addInterview.name}
+    should add an interview when called`, () => {
+        const expectedInterview: Interview = {id: 4, category: 'Back End', vacancy: 'Desenvolvedor .NET Pl'};
 
-        interviewService.findById(expectedInterviewId).subscribe(
+        interviewService.addInterview(expectedInterview).subscribe(
             interview => {
                 expect(interview).toEqual(expectedInterview)
             }
         );
 
-        const req = httpClientMock.expectOne(req => req.method === 'GET' && req.url === `${interviewService.API_URL}/${expectedInterviewId}`);
+        const req = httpClientMock.expectOne(req => req.method === 'POST' && req.url === `${interviewService.API_URL}`);
         req.flush(expectedInterview);
-        
-    })
+    });
 });
