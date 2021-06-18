@@ -11,7 +11,7 @@ import { User } from "../models/user.model";
 })
 export class UserService {
 
-    private readonly API_URL = 'http://localhost:3000/users';
+    public readonly API_URL = 'http://localhost:3000/users';
     httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -22,8 +22,7 @@ export class UserService {
     currentUser: User;
 
     constructor(
-        private http: HttpClient,
-        private router: Router) {}
+        private http: HttpClient) {}
 
     getAllUsers(): Observable<User[]> {
         return this.http.get<User[]>(this.API_URL);
@@ -39,10 +38,6 @@ export class UserService {
 
     modifyUserProfile(user: User): Observable<User> {
         return this.http.patch<User>(this.API_URL + `/${user.id}`, JSON.stringify(user), this.httpOptions);
-    }
-
-    getCurrentUser() {
-        console.log(this.currentUser);
     }
 
     userLogged(isUserLogged: boolean): boolean {
