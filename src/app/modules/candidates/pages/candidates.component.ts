@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { map, mergeMap, tap, toArray } from 'rxjs/operators';
 
 import { Candidate } from 'src/app/core/models/candidate.model';
+import { Column } from 'src/app/core/models/column.model';
+import { Row } from 'src/app/core/models/row.model';
 import { CandidateService } from 'src/app/core/services/candidates.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
@@ -38,6 +40,26 @@ export class CandidatesComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'interview', 'score', 'date', 'actions'];
   dataSource: MatTableDataSource<Candidate>;
+
+  public candidatesColumns: Column<Candidate>[] = [
+    { name: 'id'},
+    { name: 'name' },
+    { name: 'interview' },
+    { name: 'score' },
+    { name: 'date' }
+  ];
+
+  public candidatesRows: Row<Candidate>[] = [
+    {
+      values: {
+        id: 1,
+        name: 'Ezra Bridger',
+        interview: 'Padawan',
+        score: 750,
+        date: '25/06/2021'
+      }
+    }
+  ]
  
   //subscription: Subscription;
 

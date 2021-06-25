@@ -103,6 +103,11 @@
             </div>    
             </div>
 
+            <app-table
+            [columns]="candidatesColumns"
+            [rows]="candidatesRows">
+            </app-table>
+
         <!------
          <div class="search-candidate" *ngIf="searchBtnClicked==true">
             <input type="search" placeholder="Pesquisar por candidato" [(ngModel)]="searchCandidate">    
