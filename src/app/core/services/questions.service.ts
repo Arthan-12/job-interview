@@ -10,7 +10,7 @@ import { Question } from "../models/question.model";
 })
 export class QuestionService {
 
-    private readonly API_URL = 'http://localhost:3000';
+    public readonly API_URL = 'http://localhost:3000';
     httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -21,10 +21,6 @@ export class QuestionService {
 
     getAllQuestions(): Observable<Question[]> {
         return this.http.get<Question[]>(this.API_URL + '/questions');
-    }
-
-    getQuestion(): Observable<Question> {
-        return this.http.get<Question>(this.API_URL + '/questions');
     }
 
     getQuestionsByInterview(questionnaireId: number): Observable<Question[]> {

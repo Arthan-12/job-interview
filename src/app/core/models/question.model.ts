@@ -1,7 +1,7 @@
 export interface Question {
     id?: number;
     question?: string;
-    questionnaireId?: Number;
+    questionnaireId?: number;
     difficulty?: string;
     answer?:string;
 }

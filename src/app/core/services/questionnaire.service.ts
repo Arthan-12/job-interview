@@ -26,10 +26,6 @@ export class QuestionnaireService {
         return this.http.get<Questionnaire[]>(this.API_URL);
     }
 
-    getQuestionnaire(): Observable<Questionnaire> {
-        return this.http.get<Questionnaire>(this.API_URL);
-    }
-
     getQuestionnaireByInterview(interviewId: number): Observable<Questionnaire[]> {
         return this.http.get<Questionnaire[]>(this.API_URL + '/' + interviewId + '/interviews')
     }
@@ -40,10 +36,6 @@ export class QuestionnaireService {
 
     editQuestionaire(id: number, questionnaire: Questionnaire): Observable<Questionnaire> {
         return this.http.put<Questionnaire>(this.API_URL + '/' + id, JSON.stringify(questionnaire), this.httpOptions)
-    }
-
-    editQuestion(id: number): Observable<Questionnaire> {
-        return this.http.put<Questionnaire>(this.API_URL + '/' + id, this.httpOptions)
     }
     
 }
