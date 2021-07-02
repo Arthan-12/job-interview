@@ -12,6 +12,7 @@ import { HomeModule } from './modules/home/home.module';
 import { CandidatesModule } from './modules/candidates/candidates.module';
 import { InterviewsModule } from './modules/interviews/interviews.module';
 import { LoginModule } from './modules/login/login.module';
+import { DeveloperModule } from './modules/developer/developer.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginModule } from './modules/login/login.module';
     HomeModule,
     CandidatesModule,
     InterviewsModule,
-    LoginModule
+    LoginModule,
+    DeveloperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

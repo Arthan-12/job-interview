@@ -12,6 +12,8 @@ import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop/d
 import { EditQuestionDialogComponent } from './components/edit-question-dialog/edit-question-dialog.component';
 import { ConfirmDialogComponent } from "../candidates/components/confirm-dialog/confirm-dialog.component";
 import { SnackbarComponent } from "src/app/shared/components/snackbar/snackbar.component";
+import { MultipleSelectComponent } from '../developer/components/multiple-select/multiple-select.component';
+import { NgSelectModule } from "@ng-select/ng-select";
 
 
 
@@ -24,6 +26,8 @@ import { SnackbarComponent } from "src/app/shared/components/snackbar/snackbar.c
     RouterModule,
 
     SharedModule,
+
+    NgSelectModule,
 
     MatIconModule,
     MatSelectModule,

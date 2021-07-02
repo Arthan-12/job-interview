@@ -4,6 +4,7 @@ import { AuthGuard } from './core/auth/auth-guard';
 import { MaintenanceComponent } from './errors/maintenance/maintenance.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CandidatesComponent } from './modules/candidates/pages/candidates.component';
+import { DeveloperPageComponent } from './modules/developer/pages/developer-page/developer-page.component';
 import { InterviewComponent } from './modules/interviews/pages/interview/interview.component';
 import { SignUpComponent } from './modules/login/components/sign-up/sign-up.component';
 import { LoginComponent } from './modules/login/pages/login/login.component';
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: 'questionarios',
     //canActivate: [AuthGuard],
     component: InterviewComponent
+  },
+  {
+    path: 'desenvolvedor',
+    //canActivate: [AuthGuard],
+    component: DeveloperPageComponent
   },
   { 
     path: 'not-found', 

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 body {
   font-family: Roboto, Arial, sans-serif;
@@ -56,3 +57,27 @@ body {
   color: white;
   cursor: pointer;
 }
+
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.ng-select-container {
+  max-width: 388px;
+}
+
+
