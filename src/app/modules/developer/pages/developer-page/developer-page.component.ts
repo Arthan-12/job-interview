@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-developer-page',
@@ -8,16 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class DeveloperPageComponent implements OnInit {
 
   selectedAccounts = [];
-  selectedAccount = '';
+  selectedAccount = [];
 
   accounts = [
-    { name: 'Victor Augusto de Souza', acronym: 'VSU', selected: true, selectedGroup: 'Recentes' },
-    { name: 'William de Oliveira Cunha', acronym: 'WCU', selected: false, selectedGroup: 'Colaboradores'},
-    { name: 'Gabriela Trindade Pires', acronym: 'GPR', selected: false, selectedGroup: 'Colaboradores'},
-    { name: 'Ivan Souza', acronym: 'ISU', selected: false, selectedGroup: 'Colaboradores'},
-    { name: 'Renato Bonfim Herculano', acronym: 'RHE', selected: false, selectedGroup: 'Colaboradores'},
-    { name: 'Francisca Dairley Santos',acronym: 'FAV', selected:  false, selectedGroup: 'Colaboradores'},
-    { name: 'Eduarda Gabriela da Silva', acronym: 'EGS', selected: false, selectedGroup: 'Colaboradores'},
+    { name: 'Victor Augusto de Souza', acronym: 'VSU' },
+    { name: 'William de Oliveira Cunha', acronym: 'WCU'},
+    { name: 'Gabriela Trindade Pires', acronym: 'GPR'},
+    { name: 'Ivan Souza', acronym: 'ISU'},
+    { name: 'Renato Bonfim Herculano', acronym: 'RHE'},
+    { name: 'Francisca Dairley Santos',acronym: 'FAV'},
+    { name: 'Eduarda Gabriela da Silva', acronym: 'EGS'},
 ];
 
 
@@ -36,25 +37,23 @@ export class DeveloperPageComponent implements OnInit {
     return false;
   };
 
-  getSelectedValues() {
-    this.accounts.map(account => {
-      if (account.selected === true) {
-        account.selectedGroup = 'Recentes'
-      }
-      if (account.selected === false) {
-        account.selected = true
-        account.selectedGroup = 'Recentes'
-      }
-    })
-    console.log(this.selectedAccounts);
-  }
-
   getValues() {
     console.log(this.selectedAccount)
   }
 
-  clear() {
-    this.selectedAccount = '';
+  getIndex(i) {
+    console.log(this.selectedAccount[i], this.selectedAccount)
+  }
+
+  clear(i) {
+     const accountArray = this.selectedAccount;
+     accountArray[i] = "";
+    this.selectedAccount = accountArray; 
+    console.log(this.selectedAccount)
+  }
+
+  unselectAll() {
+    this.selectedAccounts = [];
   }
 
 }

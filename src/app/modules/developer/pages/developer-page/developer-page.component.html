@@ -4,27 +4,48 @@
     </div>
 <div class="select">
     <div class="select">
-        <ng-select [items]="accounts"
+        <ng-select
+        [items]="accounts"
         bindLabel="name"
         groupBy="selectedGroup"
         [multiple]="true"
         [hideSelected]="false"
         [maxSelectedItems]="4"
         [closeOnSelect]="false"
-        [(ngModel)]="selectedAccounts"
-        (click)=getSelectedValues()>
+        [clearable]="false"
+        [(ngModel)]="selectedAccounts">
+
+        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+            <span class="ng-value-label">
+                <mat-icon>
+                    account_circle
+                </mat-icon> {{item.name}} - {{item.acronym}}</span>
+            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+        </ng-template> 
         
-        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear"> 
-         <div class="ng-value" *ngFor="let item of items | slice:0:4">
-             <span class="ng-value-label">
-                 <mat-icon>
-                     account_circle
-                 </mat-icon>
-             </span>
-             {{item.name}} - {{item.acronym}}
-             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">x</span>
-        </div>
+        <ng-template ng-option-tmp let-item="item"> 
+                <span class="ng-value-label">
+                    <mat-icon>
+                        account_circle
+                    </mat-icon>
+                </span>
+                {{item.name}} - {{item.acronym}}
+                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">x</span>
         </ng-template>
+
+        <ng-template ng-footer-tmp >
+            <label class="footer-label">
+                <p>Selecionados</p>
+                <span class="ng-clear" (click)="unselectAll()">x</span>
+            </label>
+            <span *ngFor="let person of selectedAccounts">
+                <mat-icon>
+                    account_circle
+                </mat-icon>
+                <label>{{person.name}} - {{person.acronym}} <br></label>
+            </span>
+        </ng-template>
+
         </ng-select>
         <br>
     <small>Selected: {{selectedAccounts | json}}</small>
@@ -34,7 +55,7 @@
 <div class="select">
     <div class="select">
         <mat-select [(ngModel)]="selectedAccount" multiple>
-            <mat-option
+            <mat-option 
                 *ngFor="let item of accounts"
                 [value]="item.name"
                 (click)="getValues()">
@@ -42,10 +63,10 @@
             </mat-option>   
         </mat-select>
         <br>
-        <mat-label class="selected" *ngFor="let item of selectedAccount">
+        <mat-label class="selected" *ngFor="let item of selectedAccount; let i = index">
             <mat-icon>account_circle</mat-icon>
-                <p class="selected-user">{{item}}</p> 
-            <button class="close" (click)="clear()">x</button>
+                <a class="selected-user" (click)="getIndex(i)" >{{item}}</a> 
+            <button class="close" (click)="clear(i)">x</button>
         </mat-label> 
     </div>
 </div>

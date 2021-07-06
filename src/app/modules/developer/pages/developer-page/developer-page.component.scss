@@ -34,3 +34,18 @@
 .close:hover {
     background-color:rgb(215, 215, 215) ;
 }
+
+.footer-label {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid orange;
+}
+
+.ng-clear {
+    align-self: center;
+}
+
+.ng-clear:hover {
+    color: red;
+    cursor: pointer;
+}
